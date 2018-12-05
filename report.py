@@ -14,9 +14,11 @@ class Report:
         bold = workbook.add_format({'bold': True, 'bg_color': LIGHT_GRAY,'align': 'center'})
         align_center = workbook.add_format({'align': 'center','valign':'vcenter','text_wrap':True})
         align_center_left = workbook.add_format({'valign':'vcenter','text_wrap':True})
-        red_format = workbook.add_format({'bg_color': 'red'})
+        deep_red_format = workbook.add_format({'bg_color': '#860000'})
+        red_format = workbook.add_format({'bg_color': '#FF0000'})
         yellow_format = workbook.add_format({'bg_color': 'yellow'})
         green_format = workbook.add_format({'bg_color': 'green'})
+        formatCritical = {'type':'cell','criteria':'equal to','value':'"Critical"','format':deep_red_format}
         formatHigh = {'type':'cell','criteria':'equal to','value':'"High"','format':red_format}
         formatMedium = {'type':'cell','criteria':'equal to','value':'"Medium"','format':yellow_format}
         formatLow = {'type':'cell','criteria':'equal to','value':'"Low"','format':green_format}
@@ -37,7 +39,7 @@ class Report:
         worksheet.write('C1', 'IPs', bold)
         worksheet.write('D1', 'Synopsis', bold)
         worksheet.write('E1', 'Description', bold)
-        worksheet.write('E1', 'Solution', bold)
+        worksheet.write('F1', 'Solution', bold)
 
         #Empieza desde la segunda linea
         row = 1
@@ -47,6 +49,7 @@ class Report:
 
             #Formato condicional al riesgo high,medium,low
             cell = 'B' + str(row+1)
+            worksheet.conditional_format(cell,formatCritical)
             worksheet.conditional_format(cell,formatHigh)
             worksheet.conditional_format(cell,formatMedium)
             worksheet.conditional_format(cell,formatLow)
