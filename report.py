@@ -1,4 +1,5 @@
 import xlsxwriter
+from docx import Document
 from Vulnerabilidad import *
 
 class Report:
@@ -65,3 +66,33 @@ class Report:
             row +=1
 
         workbook.close()
+
+
+    def toWord(vulnerabilidades,fileName):
+        document = Document('templateInforme.docx')
+
+        for vuln in vulnerabilidades:
+            document.add_heading(vuln.name)
+            document.add_heading("Identification",level=2)
+            document.add_paragraph("Identification here")
+            document.add_heading("Vulnerability detection",level=2)
+            document.add_paragraph("Detection here")
+            document.add_heading("Exploitation",level=2)
+            document.add_paragraph("Exploitation here")
+            document.add_heading("Detailed findings and recommendations",level=2)
+            table = document.add_table(rows=6, cols=2)
+
+            table.rows[0].cells[0].text = "Vulnerability"
+            table.rows[0].cells[1].text = vuln.name
+            table.rows[1].cells[0].text = "Risk Factor: "
+            table.rows[1].cells[1].text = vuln.level
+            table.rows[2].cells[0].text = "Synopsis: "
+            table.rows[2].cells[1].text = vuln.synopsis
+            table.rows[3].cells[0].text = "Description: "
+            table.rows[3].cells[1].text = vuln.descrip
+            table.rows[4].cells[0].text = "Ips: "
+            table.rows[4].cells[1].text = '\n'.join(vuln.ips)
+            table.rows[5].cells[0].text = "Solution: "
+            table.rows[5].cells[1].text = vuln.solution
+            document.add_page_break()
+        document.save(fileName + '.docx')

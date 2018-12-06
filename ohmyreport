@@ -25,6 +25,10 @@ for index in range(vulnTotal):
     if(args.verbose):
         vulnerabilidad.mostrar()
 
-if(args.output):
-    Report.toExcel(vulnerabilidades,args.output)
-    print('[+] Reporte completado')
+if(args.excel):
+    Report.toExcel(vulnerabilidades,args.excel)
+
+if(args.word):
+    Report.toWord(vulnerabilidades,args.word)
+
+print('[+] Reporte completado')

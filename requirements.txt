@@ -1,3 +1,4 @@
 xlsxwriter
+python-docx
 BeautifulSoup4
 argparse
