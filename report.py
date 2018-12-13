@@ -1,10 +1,12 @@
 import xlsxwriter
 from docx import Document
 from Vulnerabilidad import *
+from language import *
+
 
 class Report:
 
-    def toExcel(vulnerabilidades,fileName):
+    def toExcel(vulnerabilidades,fileName,language):
         workbook = xlsxwriter.Workbook(fileName + '.xlsx')
         worksheet = workbook.add_worksheet()
 
@@ -68,31 +70,38 @@ class Report:
         workbook.close()
 
 
-    def toWord(vulnerabilidades,fileName):
+    def toWord(vulnerabilidades,fileName,language):
         document = Document('templateInforme.docx')
+        title = Language(language=language)
 
         for vuln in vulnerabilidades:
             document.add_heading(vuln.name)
-            document.add_heading("Identification",level=2)
-            document.add_paragraph("Identification here")
-            document.add_heading("Vulnerability detection",level=2)
+            document.add_heading(title["identification-title"],level=2)
+            document.add_paragraph(vuln.synopsis)
+            document.add_heading(title["vulnerability-title"],level=2)
             document.add_paragraph("Detection here")
-            document.add_heading("Exploitation",level=2)
+            document.add_heading(title["exploitation-title"],level=2)
             document.add_paragraph("Exploitation here")
-            document.add_heading("Detailed findings and recommendations",level=2)
-            table = document.add_table(rows=6, cols=2)
+            document.add_heading(title["detailed-title"],level=2)
 
-            table.rows[0].cells[0].text = "Vulnerability"
-            table.rows[0].cells[1].text = vuln.name
-            table.rows[1].cells[0].text = "Risk Factor: "
+            #Armando la tabla de detalles
+            table = document.add_table(rows=7, cols=2)
+            #Mergeo la primera fila de la tabla y le asigno el nombre de la vulnerabilidad
+            table.rows[0].cells[0].merge(table.rows[0].cells[1]).text = vuln.name
+            table.rows[1].cells[0].text = title["risk-title-table"]
             table.rows[1].cells[1].text = vuln.level
-            table.rows[2].cells[0].text = "Synopsis: "
-            table.rows[2].cells[1].text = vuln.synopsis
-            table.rows[3].cells[0].text = "Description: "
-            table.rows[3].cells[1].text = vuln.descrip
-            table.rows[4].cells[0].text = "Ips: "
-            table.rows[4].cells[1].text = '\n'.join(vuln.ips)
-            table.rows[5].cells[0].text = "Solution: "
-            table.rows[5].cells[1].text = vuln.solution
+            table.rows[2].cells[0].text = title["description-title-table"]
+            table.rows[2].cells[1].text = vuln.descrip
+            table.rows[3].cells[0].text = "Ips: "
+            table.rows[3].cells[1].text = '\n'.join(vuln.ips)
+            table.rows[4].cells[0].text = title["solution-title-table"]
+            table.rows[4].cells[1].text = vuln.solution
+            table.rows[5].cells[0].text = title["impact-title-table"]
+            table.rows[5].cells[1].text = ""
+            table.rows[6].cells[0].text = title["management-title-table"]
+            table.rows[6].cells[1].text = ""
+
+
             document.add_page_break()
+
         document.save(fileName + '.docx')
