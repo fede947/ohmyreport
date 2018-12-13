@@ -8,10 +8,6 @@ def getAllVuln(soup):
         names.append(name.get_text().split('-')[1].strip())
     return names
 
-# def getIp(soup,numberIP):
-#     divs = soup.body.div.findAll('div')[5]
-#     return divs.findAll('div')[19*numberIP].get_text()[:-1]
-
 def getVulnInfo(soup,index):
 
     name = soup.body.div.findAll('ul')[1].findAll('li')[index]
@@ -23,11 +19,10 @@ def getVulnInfo(soup,index):
     for tag in range(100):
         if(divs[tag+2].get_text().strip() == "Plugin Output"):
             break
-        # print(divs[tag+2].get_text().strip())
         vulnerabilidad.agregar(divs[tag].get_text().strip(),divs[tag+2].get_text().strip())
 
 
-    name = name.get_text().split('-')[1].strip()
+    name = '-'.join(name.get_text().split('-')[1:]).strip()
     ips = list(map(lambda ip : ip.get_text(),Taginfo.findAll('h2')))
 
     vulnerabilidad.agregar("Ips",ips)

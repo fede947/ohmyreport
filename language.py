@@ -12,9 +12,10 @@ class Language(dict):
             self["solution-title-table"] = 'Recomendacion:'
             self["impact-title-table"] = 'Impacto de Negocio:'
             self["management-title-table"] = 'Respuesta gerencial:'
+            self["exploit-subtitle"] = 'Vulnerabilidad no explotada'
 
-        if(language == 'in'):
-            self["indentification-title"] = 'Identification'
+        if(language == 'en'):
+            self["identification-title"] = 'Identification'
             self["vulnerability-title"] = 'Vulnerability detection'
             self["exploitation-title"] = 'Exploitation'
             self["detailed-title"] = 'Detailed findings and recommendations'
@@ -24,3 +25,4 @@ class Language(dict):
             self["solution-title-table"] = 'recommendations:'
             self["impact-title-table"] = 'Impact of business:'
             self["management-title-table"] = 'Gerential management:'
+            self["exploit-subtitle"] = 'Vulnerability no exploited'

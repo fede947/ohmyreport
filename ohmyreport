@@ -17,6 +17,7 @@ vulnerabilidades = ListaVulnerabilidades()
 vulnTotal = len(getAllVuln(soup))
 progress = ProgressBar(vulnTotal)
 
+print('[+] Loading report...')
 progress.mostrar()
 for index in range(vulnTotal):
     vulnerabilidad = getVulnInfo(soup,index)
@@ -25,10 +26,11 @@ for index in range(vulnTotal):
     if(args.verbose):
         vulnerabilidad.mostrar()
 
+print('[+] Translate in progres....')
 if(args.excel):
     Report.toExcel(vulnerabilidades,args.excel,args.language)
 
 if(args.word):
     Report.toWord(vulnerabilidades,args.word,args.language)
 
-print('[+] Reporte completado')
+print('[+] Report complete')
