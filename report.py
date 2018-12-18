@@ -1,11 +1,10 @@
 import xlsxwriter
 from docx import Document
-from Vulnerabilidad import *
 from language import *
 
 class Report:
 
-    def toExcel(vulnerabilidades,fileName,lang):
+    def toExcel(vulnerabilidades, fileName, lang):
         workbook = xlsxwriter.Workbook(fileName + '.xlsx')
         worksheet = workbook.add_worksheet()
 
@@ -69,7 +68,7 @@ class Report:
         workbook.close()
 
 
-    def toWord(vulnerabilidades,fileName,lang):
+    def toWord(vulnerabilidades, fileName, lang):
         document = Document('templateInforme.docx')
         title = Language(language=lang)
 

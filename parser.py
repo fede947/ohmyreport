@@ -1,17 +1,17 @@
-from Vulnerabilidad import *
+from vulnerabilidad import Vulnerabilidad
 import re
-from progressBar import *
+import progressbar
 from bs4 import BeautifulSoup
 
-class htmlParser():
+class HtmlParser():
 
-    def __init__(self,html_doc):
+    def __init__(self, html_doc):
         self.soup = BeautifulSoup(html_doc, 'html.parser')
 
     def getAllVuln(self):
         listaAux = []
         cantidad = self.getVulnCount()
-        progress = ProgressBar(cantidad)
+        progress = progressbar.ProgressBar(cantidad)
         progress.mostrar()
         for index in range(cantidad):
             progress.siguiente()
@@ -27,7 +27,7 @@ class htmlParser():
 
 
 
-    def getVulnInfo(self,index):
+    def getVulnInfo(self, index):
 
         name = self.soup.body.div.findAll('ul')[1].findAll('li')[index]
         Taginfo = self.soup.body.div.findAll('div')[5].findAll('div','section-wrapper')[index]
@@ -44,8 +44,8 @@ class htmlParser():
         name = '-'.join(name.get_text().split('-')[1:]).strip()
         ips = list(map(lambda ip : ip.get_text(),Taginfo.findAll('h2')))
 
-        vulnerabilidad.agregar("Ips",ips)
-        vulnerabilidad.agregar("Name",name)
+        vulnerabilidad.agregar("Ips", ips)
+        vulnerabilidad.agregar("Name", name)
         return vulnerabilidad
 
     def mostrarTitulo(self):

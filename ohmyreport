@@ -1,38 +1,37 @@
 #!/usr/bin/env python3
-from ListaVulnerabilidades import *
-from parser import *
-from param import *
-from progressBar import *
-from report import *
-from Vulnerabilidad import *
+import listavulnerabilidades
+import parser
+import param
+import progressbar
+import report
 
-args = arguments()
+args = param.arguments()
 
 html_doc = open(args.file,'r')
-parser = htmlParser(html_doc)
-parser.mostrarTitulo()
+htmlParser = parser.HtmlParser(html_doc)
+htmlParser.mostrarTitulo()
 
-vulnerabilidades = ListaVulnerabilidades()
+vulnerabilidades = listavulnerabilidades.ListaVulnerabilidades()
 
 
 print('[+] Loading report...')
-vulnerabilidadesParseadas = parser.getAllVuln()
+vulnerabilidadesParseadas = htmlParser.getAllVuln()
 
-print('[+] Translate in progres...')
-Progress = ProgressBar(len(vulnerabilidadesParseadas))
-Progress.mostrar()
+print('[+] Translate in progress...')
+progressBar = progressbar.ProgressBar(len(vulnerabilidadesParseadas))
+progressBar.mostrar()
 for vulnerabilidad in vulnerabilidadesParseadas:
     vulnerabilidad.traducir(args.language)
     vulnerabilidades.agregar(vulnerabilidad,excluir=['None','Info'])
-    Progress.siguiente()
+    progressBar.siguiente()
     if(args.verbose):
         vulnerabilidad.mostrar()
 
 if(args.excel):
-    Report.toExcel(vulnerabilidades,args.excel,args.language)
+    report.Report.toExcel(vulnerabilidades, args.excel, args.language)
 
 if(args.word):
-    Report.toWord(vulnerabilidades,args.word,args.language)
+    report.Report.toWord(vulnerabilidades, args.word, args.language)
 
 
 print('[+] Report complete')

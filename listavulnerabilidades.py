@@ -1,5 +1,5 @@
 class ListaVulnerabilidades(list):
-    def agregar(self,vuln,excluir):
+    def agregar(self, vuln, excluir):
         if vuln.level not in excluir:
             self.append(vuln)
 
