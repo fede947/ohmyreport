@@ -2,7 +2,6 @@ import xlsxwriter
 from docx import Document
 from Vulnerabilidad import *
 from language import *
-from mtranslate import translate
 
 class Report:
 
@@ -75,27 +74,27 @@ class Report:
         title = Language(language=lang)
 
         for vuln in vulnerabilidades:
-            document.add_heading(translate(vuln.name,lang))
-            document.add_heading(title["identification-title"],level=2)
-            document.add_paragraph(translate(vuln.synopsis,lang))
-            document.add_heading(title["vulnerability-title"],level=2)
+            document.add_heading(vuln.name)
+            document.add_heading(title["identification-title"],level=3)
+            document.add_paragraph(vuln.synopsis)
+            document.add_heading(title["vulnerability-title"],level=3)
             document.add_paragraph("Detection here")
-            document.add_heading(title["exploitation-title"],level=2)
+            document.add_heading(title["exploitation-title"],level=3)
             document.add_paragraph(title["exploit-subtitle"])
-            document.add_heading(title["detailed-title"],level=2)
+            document.add_heading(title["detailed-title"],level=3)
 
             #Armando la tabla de detalles
             table = document.add_table(rows=7, cols=2)
             #Mergeo la primera fila de la tabla y le asigno el nombre de la vulnerabilidad
             table.rows[0].cells[0].merge(table.rows[0].cells[1]).text = vuln.name
             table.rows[1].cells[0].text = title["risk-title-table"]
-            table.rows[1].cells[1].text = translate(vuln.level,lang)
+            table.rows[1].cells[1].text = vuln.level
             table.rows[2].cells[0].text = title["description-title-table"]
-            table.rows[2].cells[1].text = translate(vuln.descrip,lang)
+            table.rows[2].cells[1].text = vuln.descrip
             table.rows[3].cells[0].text = "Ips: "
             table.rows[3].cells[1].text = '\n'.join(vuln.ips)
             table.rows[4].cells[0].text = title["solution-title-table"]
-            table.rows[4].cells[1].text = translate(vuln.solution,lang)
+            table.rows[4].cells[1].text = vuln.solution
             table.rows[5].cells[0].text = title["impact-title-table"]
             table.rows[5].cells[1].text = ""
             table.rows[6].cells[0].text = title["management-title-table"]

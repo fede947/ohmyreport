@@ -1,4 +1,5 @@
 import xlsxwriter
+from translate import translate
 
 class Vulnerabilidad:
 
@@ -39,16 +40,14 @@ class Vulnerabilidad:
         if("Name"==tag):
             self.name = valor
 
-    def toExcel(self,file):
-        file.write(self.name + ',')
-        file.write(self.level + ',')
-        file.write("\"")
-        for ip in self.ips:
-            file.write("\n" + ip)
-        file.write("\"")
-        file.write(',')
-        file.write(self.synopsis + ',')
-        file.write(self.descrip)
-        file.write('\n')
-
-    #def entreComillas(self, ips):
+    def traducir(self,lang):
+        self.solution = translate(self.solution,lang)
+        print(1)
+        self.level = translate(self.level,lang)
+        print(2)
+        self.descrip = translate(self.descrip,lang)
+        print(3)
+        self.synopsis = translate(self.synopsis,lang)
+        print(4)
+        self.name = translate(self.name,lang)
+        print(5)

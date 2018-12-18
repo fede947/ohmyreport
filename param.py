@@ -1,6 +1,6 @@
 import argparse
 
-def parser():
+def arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument('-v','--verbose',help="Increase verbosity", action='store_true')
     parser.add_argument('-e','--excel',help="output to a excel file")

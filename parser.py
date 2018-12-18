@@ -1,36 +1,55 @@
 from Vulnerabilidad import *
 import re
+from progressBar import *
+from bs4 import BeautifulSoup
 
-def getAllVuln(soup):
-    names = []
-    ul = soup.body.div.findAll('ul')
-    for name in ul[1].findAll('li'):
-        names.append(name.get_text().split('-')[1].strip())
-    return names
+class htmlParser():
 
-def getVulnInfo(soup,index):
+    def __init__(self,html_doc):
+        self.soup = BeautifulSoup(html_doc, 'html.parser')
 
-    name = soup.body.div.findAll('ul')[1].findAll('li')[index]
-    Taginfo = soup.body.div.findAll('div')[5].findAll('div','section-wrapper')[index]
+    def getAllVuln(self):
+        listaAux = []
+        cantidad = self.getVulnCount()
+        progress = ProgressBar(cantidad)
+        progress.mostrar()
+        for index in range(cantidad):
+            progress.siguiente()
+            listaAux.append(self.getVulnInfo(index))
+        return listaAux
+
+    def getVulnCount(self):
+        names = []
+        ul = self.soup.body.div.findAll('ul')
+        for name in ul[1].findAll('li'):
+            names.append(name.get_text().split('-')[1].strip())
+        return len(names)
 
 
-    vulnerabilidad = Vulnerabilidad()
-    divs = Taginfo.findAll('div')
-    for tag in range(100):
-        if(divs[tag+2].get_text().strip() == "Plugin Output"):
-            break
-        vulnerabilidad.agregar(divs[tag].get_text().strip(),divs[tag+2].get_text().strip())
+
+    def getVulnInfo(self,index):
+
+        name = self.soup.body.div.findAll('ul')[1].findAll('li')[index]
+        Taginfo = self.soup.body.div.findAll('div')[5].findAll('div','section-wrapper')[index]
 
 
-    name = '-'.join(name.get_text().split('-')[1:]).strip()
-    ips = list(map(lambda ip : ip.get_text(),Taginfo.findAll('h2')))
+        vulnerabilidad = Vulnerabilidad()
+        divs = Taginfo.findAll('div')
+        for tag in range(100):
+            if(divs[tag+2].get_text().strip() == "Plugin Output"):
+                break
+            vulnerabilidad.agregar(divs[tag].get_text().strip(),divs[tag+2].get_text().strip())
 
-    vulnerabilidad.agregar("Ips",ips)
-    vulnerabilidad.agregar("Name",name)
-    return vulnerabilidad
 
-def mostrarTitulo(soup):
-    print("")
-    print("")
-    print(soup.title.get_text())
-    print("")
+        name = '-'.join(name.get_text().split('-')[1:]).strip()
+        ips = list(map(lambda ip : ip.get_text(),Taginfo.findAll('h2')))
+
+        vulnerabilidad.agregar("Ips",ips)
+        vulnerabilidad.agregar("Name",name)
+        return vulnerabilidad
+
+    def mostrarTitulo(self):
+        print("")
+        print("")
+        print(self.soup.title.get_text())
+        print("")

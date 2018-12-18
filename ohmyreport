@@ -1,36 +1,38 @@
 #!/usr/bin/env python3
-from bs4 import BeautifulSoup
 from ListaVulnerabilidades import *
 from parser import *
 from param import *
 from progressBar import *
 from report import *
+from Vulnerabilidad import *
 
-args = parser()
+args = arguments()
 
 html_doc = open(args.file,'r')
-soup = BeautifulSoup(html_doc, 'html.parser')
-
-mostrarTitulo(soup)
+parser = htmlParser(html_doc)
+parser.mostrarTitulo()
 
 vulnerabilidades = ListaVulnerabilidades()
-vulnTotal = len(getAllVuln(soup))
-progress = ProgressBar(vulnTotal)
+
 
 print('[+] Loading report...')
-progress.mostrar()
-for index in range(vulnTotal):
-    vulnerabilidad = getVulnInfo(soup,index)
-    progress.siguiente()
+vulnerabilidadesParseadas = parser.getAllVuln()
+
+print('[+] Translate in progres...')
+Progress = ProgressBar(len(vulnerabilidadesParseadas))
+Progress.mostrar()
+for vulnerabilidad in vulnerabilidadesParseadas:
+    vulnerabilidad.traducir(args.language)
     vulnerabilidades.agregar(vulnerabilidad,excluir=['None','Info'])
+    Progress.siguiente()
     if(args.verbose):
         vulnerabilidad.mostrar()
 
-print('[+] Translate in progres....')
 if(args.excel):
     Report.toExcel(vulnerabilidades,args.excel,args.language)
 
 if(args.word):
     Report.toWord(vulnerabilidades,args.word,args.language)
+
 
 print('[+] Report complete')
