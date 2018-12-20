@@ -35,11 +35,11 @@ for vulnerabilidad in vulnerabilidadesParseadas:
 print('')
 if(args.excel):
     Report.toExcel(vulnerabilidades, args.output, args.language)
-    print('[+] Word done')
+    print('[+] Excel done')
 
 if(args.word):
     Report.toWord(vulnerabilidades, args.output, args.language)
-    print('[+] Excel done')
+    print('[+] Word done')
 
 print('')
 print('[+] Reports complete')
