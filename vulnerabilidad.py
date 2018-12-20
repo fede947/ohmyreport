@@ -46,3 +46,6 @@ class Vulnerabilidad:
         self.descrip = translate(self.descrip, lang)
         self.synopsis = translate(self.synopsis, lang)
         self.name = translate(self.name, lang)
+
+    def trimIp(self, ip):
+        return ip.split()[0]

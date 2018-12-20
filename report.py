@@ -67,55 +67,6 @@ class Report:
 
         workbook.close()
 
-    def content(document, language):
-        document.add_heading(language["content"])
-        document.add_page_break()
-
-    def executiveSummary(document, vulnerabilities, language):
-        document.add_heading(language["executive-summary"])
-        document.add_heading(language["introduction"], level=3)
-        document.add_paragraph("{}{}".format("[empresa]", language["introduction-paragraph"]))
-
-        document.add_heading(language["objetive"], level=3)
-        document.add_paragraph(language["objetive-paragraph"])
-        document.add_paragraph("[ip recibida]")
-        document.add_paragraph("[ip recibida]")
-
-        document.add_heading(language["percentage"], level=3)
-        document.add_paragraph(language["percentage-paragraph"])
-        cantTable = document.add_table(rows=4, cols=2)
-        cantTable.rows[0].cells[0].text = language["risk-title-table"]
-        cantTable.rows[0].cells[1].text = language["cant"]
-        cantTable.rows[1].cells[0].text = language["high-risk"]
-        cantTable.rows[1].cells[1].text = "[cant altos]"
-        cantTable.rows[2].cells[0].text = language["medium-risk"]
-        cantTable.rows[2].cells[1].text = "[cant medio]"
-        cantTable.rows[3].cells[0].textdescriptionTable  = language["low-risk"]
-        cantTable.rows[3].cells[1].text = "[cant bajo]"
-        document.add_paragraph("")
-        descriptionTable = document.add_table(rows=4, cols=3)
-        descriptionTable.rows[0].cells[0].text = "#"
-        descriptionTable.rows[0].cells[1].text = language["observation"]
-        descriptionTable.rows[0].cells[2].text = language["risk-title-table"]
-        descriptionTable.rows[1].cells[0].text = "1"
-        descriptionTable.rows[1].cells[1].text = "nombre vulneravilidad"
-        descriptionTable.rows[1].cells[2].text = language["high-risk"]
-        descriptionTable.rows[2].cells[0].text = "2"
-        descriptionTable.rows[2].cells[1].text = "nombre vulneravilidad"
-        descriptionTable.rows[2].cells[2].text = language["medium-risk"]
-        descriptionTable.rows[3].cells[0].text = "3"
-        descriptionTable.rows[3].cells[1].text = "nombre vulneravilidad"
-        descriptionTable.rows[3].cells[2].text = language["low-risk"]
-
-        document.add_heading(language["conclutions"], level=3)
-        document.add_paragraph(language["conclutions-paragraph"])
-
-        document.add_page_break()
-        
-
-
-
-
     def toWord(vulnerabilidades, fileName, lang):
         document = Document('templateInforme.docx')
         title = Language(language=lang)
@@ -155,3 +106,45 @@ class Report:
             document.add_page_break()
 
         document.save(fileName + '.docx')
+
+    def content(document, language):
+        document.add_heading(language["content"])
+        document.add_page_break()
+
+    def executiveSummary(document, vulnerabilities, language):
+        document.add_heading(language["executive-summary"])
+        document.add_heading(language["introduction"], level=3)
+        document.add_paragraph("{}{}".format("[empresa]", language["introduction-paragraph"]))
+
+        document.add_heading(language["objetive"], level=3)
+        document.add_paragraph(language["objetive-paragraph"])
+        document.add_paragraph('\n'.join(vulnerabilities.ips()))
+
+        document.add_heading(language["percentage"], level=3)
+        document.add_paragraph(language["percentage-paragraph"].format(len(vulnerabilities), vulnerabilities.count('Critical'), vulnerabilities.count('High'), vulnerabilities.count('Medium'), vulnerabilities.count('Low')))
+        cantTable = document.add_table(rows=5, cols=2)
+        cantTable.rows[0].cells[0].text = language["risk-title-table"]
+        cantTable.rows[0].cells[1].text = language["cant"]
+        cantTable.rows[1].cells[0].text = language["critical-risk"]
+        cantTable.rows[1].cells[1].text = str(vulnerabilities.count('Critical'))
+        cantTable.rows[2].cells[0].text = language["high-risk"]
+        cantTable.rows[2].cells[1].text = str(vulnerabilities.count('High'))
+        cantTable.rows[3].cells[0].text = language["medium-risk"]
+        cantTable.rows[3].cells[1].text = str(vulnerabilities.count('Medium'))
+        cantTable.rows[4].cells[0].text  = language["low-risk"]
+        cantTable.rows[4].cells[1].text = str(vulnerabilities.count('Low'))
+        document.add_paragraph("")
+        descriptionTable = document.add_table(rows=len(vulnerabilities)+1, cols=3)
+        descriptionTable.rows[0].cells[0].text = "#"
+        descriptionTable.rows[0].cells[1].text = language["observation"]
+        descriptionTable.rows[0].cells[2].text = language["risk-title-table"]
+
+        for index, vuln in enumerate(vulnerabilities):
+            descriptionTable.rows[index+1].cells[0].text = str(index+1)
+            descriptionTable.rows[index+1].cells[1].text = vuln.name
+            descriptionTable.rows[index+1].cells[2].text = vuln.level
+
+        document.add_heading(language["conclutions"], level=3)
+        document.add_paragraph(language["conclutions-paragraph"])
+
+        document.add_page_break()
