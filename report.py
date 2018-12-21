@@ -67,13 +67,13 @@ class Report:
 
         workbook.close()
 
-    def toWord(vulnerabilidades, fileName, lang):
+    def toWord(vulnerabilidades, fileName, lang, client):
         document = Document('templateInforme.docx')
         title = Language(language=lang)
 
         Report.content(document, title)
 
-        Report.executiveSummary(document, vulnerabilidades, title)
+        Report.executiveSummary(document, vulnerabilidades, title, client)
 
         for vuln in vulnerabilidades:
             document.add_heading(vuln.name)
@@ -111,10 +111,10 @@ class Report:
         document.add_heading(language["content"])
         document.add_page_break()
 
-    def executiveSummary(document, vulnerabilities, language):
+    def executiveSummary(document, vulnerabilities, language, client):
         document.add_heading(language["executive-summary"])
         document.add_heading(language["introduction"], level=3)
-        document.add_paragraph("{}{}".format("[empresa]", language["introduction-paragraph"]))
+        document.add_paragraph("{}{}".format(client, language["introduction-paragraph"]))
 
         document.add_heading(language["objetive"], level=3)
         document.add_paragraph(language["objetive-paragraph"])

@@ -8,6 +8,7 @@ def arguments():
     parser.add_argument('-w','--word', help="create a word file (default: word)", action='store_true')
     parser.add_argument('-o','--output', help="output file (default: NessusFile's name)", metavar='FILE')
     parser.add_argument('-l','--language', help="language of the file (default: english)", choices=['en','es'], default='en')
+    parser.add_argument('-c','--client', help="client name", default='[empresa]')
 
     parser.add_argument('file', metavar='NessusFile')
     args = parser.parse_args()
