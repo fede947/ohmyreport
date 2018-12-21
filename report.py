@@ -1,6 +1,9 @@
 import xlsxwriter
 from docx import Document
 from language import *
+import os
+import xmlservicedetecter
+import servicedetecter
 
 class Report:
 
@@ -67,13 +70,15 @@ class Report:
 
         workbook.close()
 
-    def toWord(vulnerabilidades, fileName, lang, client):
+    def toWord(vulnerabilidades, fileName, lang, client, nmap):
         document = Document('templateInforme.docx')
         title = Language(language=lang)
 
         Report.content(document, title)
 
         Report.executiveSummary(document, vulnerabilidades, title, client)
+
+        Report.discovery(document, vulnerabilidades.ips(), title, client, nmap)
 
         for vuln in vulnerabilidades:
             document.add_heading(vuln.name)
@@ -148,3 +153,28 @@ class Report:
         document.add_paragraph(language["conclutions-paragraph"])
 
         document.add_page_break()
+    
+    def discovery(document, ips, language, client, nmap):
+        document.add_heading(language["security-evaluation"])
+        document.add_heading(language["discovery"], level=3)
+        document.add_paragraph(language["discovery-paragraph-1"].format(client))
+        document.add_paragraph((os.linesep).join(ips))
+        document.add_paragraph(language["discovery-paragraph-2"])
+        document.add_heading(language["nslookup"], level=3)
+        document.add_paragraph(language["nslookup-paragraph"])
+        document.add_heading(language["whois"], level=3)
+        document.add_paragraph(language["whois-paragraph"])
+        document.add_heading(language["traceroute"], level=3)
+        document.add_paragraph(language["traceroute-paragraph"])
+        document.add_heading(language["port-scan"], level=3)
+        document.add_paragraph(language["port-scan-paragraph"])
+
+        Report.scanTable(document, nmap)
+        document.add_page_break()
+
+    def scanTable(document, nmap):
+        if (nmap):
+            serviceDetecter = servicedetecter.ServiceDetecter()
+            xmlServiceDetecter = xmlservicedetecter.XmlServiceDetecter(serviceDetecter, nmap)
+            serviceDetecter.write(document)
+

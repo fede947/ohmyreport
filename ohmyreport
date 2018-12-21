@@ -38,7 +38,7 @@ if(args.excel):
     print('[+] Excel done')
 
 if(args.word):
-    Report.toWord(vulnerabilidades, args.output, args.language, args.client)
+    Report.toWord(vulnerabilidades, args.output, args.language, args.client, args.nmap)
     print('[+] Word done')
 
 print('')
