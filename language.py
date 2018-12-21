@@ -68,6 +68,21 @@ Trace utiliza paquetes ICMP los cuales en muchos casos se encuentran filtrados p
 """
             self["port-scan"] = "Resultados del escaneo de puertos"
             self["port-scan-paragraph"] = "La siguiente tabla muestra los resultados del escaneo de puertos y adquisición de banners realizado"
+            self["vulnerabilities-identification"] = "Identificación de vulnerabilidades"
+            self["vulnerabilities-identification-paragraph"] = """Se realizó un escaneo a las direcciones identificadas durante la Fase 1 con herramientas propias y con otras de uso público, con el propósito de determinar los sistemas operativos y servicios habilitados en la red de la Compañía. Luego se realizó un “Banner acquisition” para determinar los sistemas y versiones del software que se ejecutan en los hosts.
+
+La identificación del sistema operativo es realizada por medio de técnicas de TCP/IP “OS fingerprinting”. Abusando de las diferentes formas en que las empresas de software implementan el “stack” de TCP/IP, las herramientas de escaneo realizan una comparación de estos stacks contra una base de datos, determinando así el tipo y versión de los sistemas operativos.
+
+La técnica de “Banner acquisition” permite recopilar información adicional, con el fin de identificar de una manera más certera el sistema operativo que se ejecuta en cada host. Una vez recopilada dicha información, es posible relacionarla con una vulnerabilidad propia de cada sistema operativo. 
+
+Dado que los puertos de comunicación representan una potencial vía de acceso, los profesionales de BTR Consulting realizaron un escaneo de puertos utilizando técnicas de evasión de sistemas de detección de intrusos (IDS) para identificar aquellos que se encuentran abiertos, con el fin de hallar potenciales vulnerabilidades asociadas a los mismos.
+
+Utilizando la información adquirida durante el escaneo de puertos y la obtención de banners, los profesionales de BTR Consulting realizaron una búsqueda de vulnerabilidades utilizando herramientas propias, otras disponibles en Internet y técnicas manuales a fin de poder detectar las debilidades existentes en los puertos abiertos.
+"""
+            self["explotation"] = "Explotación"
+            self["explotation-paragraph"] = "Los profesionales de BTR Consulting utilizaron la información recopilada en la fase de identificación de vulnerabilidades, para aplicar técnicas intrusivas con el objetivo de obtener acceso no autorizado a los hosts de la Compañía. Si bien no se detectaron vulnerabilidades que permitirían el acceso a los dispositivos de la redexpuesta de [empresa], se detectaron algunas vulnerabilidades y debilidades de configuración, que si bien no concluyeron en el compromiso de la integridad de la red externa, requieren de modificaciones con el objetivo de reforzar la seguridad del entorno de TI."
+            self["recomendation"] = "Vulnerabilidades y recomendaciones asociadas"
+            self["recomendation-paragraph"] = "Las siguientes son recomendaciones deberían ser aplicadas con el objetivo de mejorar la seguridad del ambiente de tecnología de la Compañía. Si bien las recomendaciones aquí expuestas han sido probadas por BTR Consulting, deberían ser probadas en horarios no productivos y entornos de prueba de [empresa]. Asimismo resulta recomendable disponer de full backups antes de implementar las recomendaciones aquí descritas, asegurando la correcta funcionalidad y continuidad del procesamiento."
 
         if(language == 'en'):
             self["identification-title"] = 'Identification'
@@ -136,3 +151,19 @@ Trace utiliza paquetes ICMP los cuales en muchos casos se encuentran filtrados p
 """
             self["port-scan"] = "Port scanning results"
             self["port-scan-paragraph"] = "La siguiente tabla muestra los resultados del escaneo de puertos y adquisición de banners realizado"
+            self["vulnerabilities-identification"] = "Vulnerabilities identification"
+            self["vulnerabilities-identification-paragraph"] = """Se realizó un escaneo a las direcciones identificadas durante la Fase 1 con herramientas propias y con otras de uso público, con el propósito de determinar los sistemas operativos y servicios habilitados en la red de la Compañía. Luego se realizó un “Banner acquisition” para determinar los sistemas y versiones del software que se ejecutan en los hosts.
+
+La identificación del sistema operativo es realizada por medio de técnicas de TCP/IP “OS fingerprinting”. Abusando de las diferentes formas en que las empresas de software implementan el “stack” de TCP/IP, las herramientas de escaneo realizan una comparación de estos stacks contra una base de datos, determinando así el tipo y versión de los sistemas operativos.
+
+La técnica de “Banner acquisition” permite recopilar información adicional, con el fin de identificar de una manera más certera el sistema operativo que se ejecuta en cada host. Una vez recopilada dicha información, es posible relacionarla con una vulnerabilidad propia de cada sistema operativo.
+
+Dado que los puertos de comunicación representan una potencial vía de acceso, los profesionales de BTR Consulting realizaron un escaneo de puertos utilizando técnicas de evasión de sistemas de detección de intrusos (IDS) para identificar aquellos que se encuentran abiertos, con el fin de hallar potenciales vulnerabilidades asociadas a los mismos.
+
+Utilizando la información adquirida durante el escaneo de puertos y la obtención de banners, los profesionales de BTR Consulting realizaron una búsqueda de vulnerabilidades utilizando herramientas propias, otras disponibles en Internet y técnicas manuales a fin de poder detectar las debilidades existentes en los puertos abiertos.
+"""
+            self["explotation"] = "Explotation"
+            self["explotation-paragraph"] = "Los profesionales de BTR Consulting utilizaron la información recopilada en la fase de identificación de vulnerabilidades, para aplicar técnicas intrusivas con el objetivo de obtener acceso no autorizado a los hosts de la Compañía. Si bien no se detectaron vulnerabilidades que permitirían el acceso a los dispositivos de la redexpuesta de {}, se detectaron algunas vulnerabilidades y debilidades de configuración, que si bien no concluyeron en el compromiso de la integridad de la red externa, requieren de modificaciones con el objetivo de reforzar la seguridad del entorno de TI."
+            self["recomendation"] = "Vulnerabilities and associated recommendations"
+            self["recomendation-paragraph"] = "Las siguientes son recomendaciones deberían ser aplicadas con el objetivo de mejorar la seguridad del ambiente de tecnología de la Compañía. Si bien las recomendaciones aquí expuestas han sido probadas por BTR Consulting, deberían ser probadas en horarios no productivos y entornos de prueba de {}. Asimismo resulta recomendable disponer de full backups antes de implementar las recomendaciones aquí descritas, asegurando la correcta funcionalidad y continuidad del procesamiento."
+    

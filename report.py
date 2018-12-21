@@ -80,36 +80,8 @@ class Report:
 
         Report.discovery(document, vulnerabilidades.ips(), title, client, nmap)
 
-        for vuln in vulnerabilidades:
-            document.add_heading(vuln.name)
-            document.add_heading(title["identification-title"],level=3)
-            document.add_paragraph(vuln.synopsis)
-            document.add_heading(title["vulnerability-title"],level=3)
-            document.add_paragraph("Detection here")
-            document.add_heading(title["exploitation-title"],level=3)
-            document.add_paragraph(title["exploit-subtitle"])
-            document.add_heading(title["detailed-title"],level=3)
-
-            #Armando la tabla de detalles
-            table = document.add_table(rows=7, cols=2)
-            #Mergeo la primera fila de la tabla y le asigno el nombre de la vulnerabilidad
-            table.rows[0].cells[0].merge(table.rows[0].cells[1]).text = vuln.name
-            table.rows[1].cells[0].text = title["risk-title-table"]
-            table.rows[1].cells[1].text = vuln.level
-            table.rows[2].cells[0].text = title["description-title-table"]
-            table.rows[2].cells[1].text = vuln.descrip
-            table.rows[3].cells[0].text = "Ips: "
-            table.rows[3].cells[1].text = '\n'.join(vuln.ips)
-            table.rows[4].cells[0].text = title["solution-title-table"]
-            table.rows[4].cells[1].text = vuln.solution
-            table.rows[5].cells[0].text = title["impact-title-table"]
-            table.rows[5].cells[1].text = ""
-            table.rows[6].cells[0].text = title["management-title-table"]
-            table.rows[6].cells[1].text = ""
-
-
-            document.add_page_break()
-
+        Report.vulnerabilities(document, vulnerabilidades, title, client)
+        
         document.save(fileName + '.docx')
 
     def content(document, language):
@@ -177,4 +149,43 @@ class Report:
             serviceDetecter = servicedetecter.ServiceDetecter()
             xmlServiceDetecter = xmlservicedetecter.XmlServiceDetecter(serviceDetecter, nmap)
             serviceDetecter.write(document)
+
+    def vulnerabilities(document, vulnerabilities, language, client):
+        document.add_heading(language["vulnerabilities-identification"])
+        document.add_paragraph(language["vulnerabilities-identification-paragraph"])
+        document.add_heading(language["explotation"])
+        document.add_paragraph(language["explotation-paragraph"].format(client))
+        document.add_heading(language["recomendation"])
+        document.add_paragraph(language["recomendation-paragraph"].format(client))
+
+        for vuln in vulnerabilities:
+            document.add_heading(vuln.name)
+            document.add_heading(language["identification-title"],level=3)
+            document.add_paragraph(vuln.synopsis)
+            document.add_heading(language["vulnerability-title"],level=3)
+            document.add_paragraph("Detection here")
+            document.add_heading(language["exploitation-title"],level=3)
+            document.add_paragraph(language["exploit-subtitle"])
+            document.add_heading(language["detailed-title"],level=3)
+
+            #Armando la tabla de detalles
+            table = document.add_table(rows=7, cols=2)
+            #Mergeo la primera fila de la tabla y le asigno el nombre de la vulnerabilidad
+            table.rows[0].cells[0].merge(table.rows[0].cells[1]).text = vuln.name
+            table.rows[1].cells[0].text = language["risk-title-table"]
+            table.rows[1].cells[1].text = vuln.level
+            table.rows[2].cells[0].text = language["description-title-table"]
+            table.rows[2].cells[1].text = vuln.descrip
+            table.rows[3].cells[0].text = "Ips: "
+            table.rows[3].cells[1].text = '\n'.join(vuln.ips)
+            table.rows[4].cells[0].text = language["solution-title-table"]
+            table.rows[4].cells[1].text = vuln.solution
+            table.rows[5].cells[0].text = language["impact-title-table"]
+            table.rows[5].cells[1].text = ""
+            table.rows[6].cells[0].text = language["management-title-table"]
+            table.rows[6].cells[1].text = ""
+
+
+            document.add_page_break()
+
 
