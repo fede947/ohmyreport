@@ -169,21 +169,29 @@ class Report:
             document.add_heading(language["detailed-title"],level=3)
 
             #Armando la tabla de detalles
-            table = document.add_table(rows=7, cols=2)
+            table = document.add_table(rows=11, cols=2)
             #Mergeo la primera fila de la tabla y le asigno el nombre de la vulnerabilidad
             table.rows[0].cells[0].merge(table.rows[0].cells[1]).text = vuln.name
             table.rows[1].cells[0].text = language["risk-title-table"]
             table.rows[1].cells[1].text = vuln.level
-            table.rows[2].cells[0].text = language["description-title-table"]
-            table.rows[2].cells[1].text = vuln.descrip
-            table.rows[3].cells[0].text = "Ips: "
-            table.rows[3].cells[1].text = '\n'.join(vuln.ips)
-            table.rows[4].cells[0].text = language["solution-title-table"]
-            table.rows[4].cells[1].text = vuln.solution
-            table.rows[5].cells[0].text = language["impact-title-table"]
-            table.rows[5].cells[1].text = ""
-            table.rows[6].cells[0].text = language["management-title-table"]
+            table.rows[2].cells[0].text = language["category-title-table"]
+            table.rows[2].cells[1].text = ""
+            table.rows[3].cells[0].text = language["description-title-table"]
+            table.rows[3].cells[1].text = vuln.descrip
+            table.rows[4].cells[0].text = "Ips: "
+            table.rows[4].cells[1].text = '\n'.join(vuln.ips)
+            table.rows[5].cells[0].text = language["solution-title-table"]
+            table.rows[5].cells[1].text = vuln.solution
+            table.rows[6].cells[0].text = language["impact-title-table"]
             table.rows[6].cells[1].text = ""
+            table.rows[7].cells[0].text = language["CVSS-title-table"]
+            table.rows[7].cells[1].text = ""
+            table.rows[8].cells[0].text = language["CVE-title-table"]
+            table.rows[8].cells[1].text = ""
+            table.rows[9].cells[0].text = language["effort-title-table"]
+            table.rows[9].cells[1].text = ""
+            table.rows[10].cells[0].text = language["management-title-table"]
+            table.rows[10].cells[1].text = ""
 
 
             document.add_page_break()
