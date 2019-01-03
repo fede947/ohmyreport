@@ -2,9 +2,9 @@ class Language(dict):
 
     def __init__(self,language):
         if(language == 'es'):
-            self["identification-title"] = 'Identificacion'
+            self["identification-title"] = 'Identificación'
             self["vulnerability-title"] = 'Deteccion de vulnerabilidad'
-            self["exploitation-title"] = 'Explotacion'
+            self["exploitation-title"] = 'Explotación'
             self["detailed-title"] = 'Detalles y recomendaciones'
             self["vulnerability-title-table"] = 'Vulnerabilidad:'
             self["risk-title-table"] = 'Riesgo:'
