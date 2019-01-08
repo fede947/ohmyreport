@@ -1,22 +1,23 @@
 from vulnerabilidad import Vulnerabilidad
 import re
 import progressbar
-from bs4 import BeautifulSoup
+import csv
 
-class HtmlParser():
+class CsvParser():
 
-    def __init__(self, html_doc):
-        self.soup = BeautifulSoup(html_doc, 'html.parser')
+    def __init__(self, fileName):
+        self.fileName = fileName
 
     def getAllVuln(self):
-        listaAux = []
-        cantidad = self.getVulnCount()
-        progress = progressbar.ProgressBar(cantidad)
-        progress.mostrar()
-        for index in range(cantidad):
-            progress.siguiente()
-            listaAux.append(self.getVulnInfo(index))
-        return listaAux
+        vulnDict = {}
+        with open(self.fileName, 'r') as nesusCsv:
+            nesusReader = csv.DictReader(nesusCsv)
+            for row in nesusReader:
+                vuln = vulnDict.get(row["Name"], Vulnerabilidad())
+                vuln.set(row)
+                vulnDict[row["Name"]] = vuln
+
+        return vulnDict.values()
 
     def getVulnCount(self):
         names = []

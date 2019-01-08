@@ -8,17 +8,17 @@ class ListaVulnerabilidades(list):
             if vuln.trimIp(ip) not in self.TotalIps:
                 self.TotalIps.append(vuln.trimIp(ip))
 
-        if vuln.level not in excluir:
+        if vuln.risk not in excluir:
             self.append(vuln)
 
     def mostrar(self):
         for vuln in self:
             vuln.mostrar()
 
-    def count(self, level):
+    def count(self, risk):
         count = 0
         for vuln in self:
-            if vuln.level == level:
+            if vuln.risk == risk:
                 count = count + 1
         return count
 

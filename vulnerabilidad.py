@@ -1,17 +1,19 @@
 import xlsxwriter
 from translate import translate
 
+NA = "N/A"
+
 class Vulnerabilidad:
 
     def __init__(self):
-        valor = "N/A"
-        self.solution = valor
-        self.level = valor
-        self.descrip = valor
-        self.synopsis = valor
-        self.cvss = valor
+        self.cve = NA
+        self.cvss = NA
+        self.risk = NA
         self.ips = []
-        self.name = valor
+        self.name = NA
+        self.synopsis = NA
+        self.descrip = NA
+        self.solution = NA
 
     def mostrar(self):
         print("name: " + self.name)
@@ -24,25 +26,23 @@ class Vulnerabilidad:
             print(ip)
         print("--------------------------------------------------------------")
 
-    def agregar(self,tag,valor):
-        if ("Solution" == tag):
-            self.solution = valor
-        if ("Risk Factor" == tag):
-            self.level = valor
-        if ("Description" == tag):
-            self.descrip = valor
-        if ("Synopsis" == tag):
-            self.synopsis = valor
-        if ("CVSS Base Score" == tag):
-            self.cvss = valor.split()[0]
-        if ("Ips" == tag):
-            self.ips = valor
-        if ("Name" == tag):
-            self.name = valor
+    def set(self, row):
+        if (self.name == NA):
+            self.cve = row["CVE"]
+            self.cvss = row["CVSS"]
+            self.risk = row["Risk"]
+            self.ips.append("{} ({}/{})".format(row["Host"], row["Protocol"], row["Port"]))
+            self.name = row["Name"]
+            self.synopsis = row["Synopsis"]
+            self.descrip = row["Description"]
+            self.solution = row["Solution"]
+        else:
+            self.ips.append("{} ({}/{})".format(row["Host"], row["Protocol"], row["Port"]))
+
 
     def traducir(self, lang):
         self.solution = translate(self.solution, lang)
-        self.level = translate(self.level, lang)
+        self.risk = translate(self.risk, lang)
         self.descrip = translate(self.descrip, lang)
         self.synopsis = translate(self.synopsis, lang)
         self.name = translate(self.name, lang)

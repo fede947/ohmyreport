@@ -60,7 +60,7 @@ class Report:
 
             #Escribo la fila con los datos de la vulnerabilidad
             worksheet.write(row,col,vuln.name)
-            worksheet.write(row,col+1,vuln.level)
+            worksheet.write(row,col+1,vuln.risk)
             worksheet.write(row,col+2,'\n'.join(vuln.ips))
             worksheet.write(row,col+3,vuln.synopsis)
             worksheet.write(row,col+4,vuln.descrip)
@@ -119,7 +119,7 @@ class Report:
         for index, vuln in enumerate(vulnerabilities):
             descriptionTable.rows[index+1].cells[0].text = str(index+1)
             descriptionTable.rows[index+1].cells[1].text = vuln.name
-            descriptionTable.rows[index+1].cells[2].text = vuln.level
+            descriptionTable.rows[index+1].cells[2].text = vuln.risk
 
         document.add_heading(language["conclutions"], level=3)
         document.add_paragraph(language["conclutions-paragraph"])
@@ -173,7 +173,7 @@ class Report:
             #Mergeo la primera fila de la tabla y le asigno el nombre de la vulnerabilidad
             table.rows[0].cells[0].merge(table.rows[0].cells[1]).text = vuln.name
             table.rows[1].cells[0].text = language["risk-title-table"]
-            table.rows[1].cells[1].text = vuln.level
+            table.rows[1].cells[1].text = vuln.risk
             table.rows[2].cells[0].text = language["category-title-table"]
             table.rows[2].cells[1].text = ""
             table.rows[3].cells[0].text = language["description-title-table"]
