@@ -18,7 +18,7 @@ Los posibles argumentos de ohmyreport son:
     en para Ingles  
     
 -c: Agregar el nombre del cliente objetivo. Por defecto: [empresa]  
--n: Agregrar la salida del escaneo de puertos realizado en nmap para anexarlo al reporte ejecutivo. El mismo se debe guardar en formato xml con el argumento -oX
+-n: Agregrar la salida del escaneo de puertos realizado en nmap para anexarlo al reporte ejecutivo. El mismo se debe guardar en formato xml con el argumento -oX  
 NESSUSFILE.csv: archivo csv exportado de Nessus  
 
 ##Ejemplos  
