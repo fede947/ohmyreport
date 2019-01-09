@@ -102,13 +102,13 @@ class Report:
         cantTable = document.add_table(rows=5, cols=2)
         cantTable.rows[0].cells[0].text = language["risk-title-table"]
         cantTable.rows[0].cells[1].text = language["cant"]
-        cantTable.rows[1].cells[0].text = language["critical-risk"]
+        cantTable.rows[1].cells[0].text = language["Critical"]
         cantTable.rows[1].cells[1].text = str(vulnerabilities.count('Critical'))
-        cantTable.rows[2].cells[0].text = language["high-risk"]
+        cantTable.rows[2].cells[0].text = language["High"]
         cantTable.rows[2].cells[1].text = str(vulnerabilities.count('High'))
-        cantTable.rows[3].cells[0].text = language["medium-risk"]
+        cantTable.rows[3].cells[0].text = language["Medium"]
         cantTable.rows[3].cells[1].text = str(vulnerabilities.count('Medium'))
-        cantTable.rows[4].cells[0].text  = language["low-risk"]
+        cantTable.rows[4].cells[0].text  = language["Low"]
         cantTable.rows[4].cells[1].text = str(vulnerabilities.count('Low'))
         document.add_paragraph("")
         descriptionTable = document.add_table(rows=len(vulnerabilities)+1, cols=3)
@@ -119,7 +119,7 @@ class Report:
         for index, vuln in enumerate(vulnerabilities):
             descriptionTable.rows[index+1].cells[0].text = str(index+1)
             descriptionTable.rows[index+1].cells[1].text = vuln.name
-            descriptionTable.rows[index+1].cells[2].text = vuln.risk
+            descriptionTable.rows[index+1].cells[2].text = language[vuln.risk]
 
         document.add_heading(language["conclutions"], level=3)
         document.add_paragraph(language["conclutions-paragraph"])
@@ -173,7 +173,7 @@ class Report:
             #Mergeo la primera fila de la tabla y le asigno el nombre de la vulnerabilidad
             table.rows[0].cells[0].merge(table.rows[0].cells[1]).text = vuln.name
             table.rows[1].cells[0].text = language["risk-title-table"]
-            table.rows[1].cells[1].text = vuln.risk
+            table.rows[1].cells[1].text = language[vuln.risk]
             table.rows[2].cells[0].text = language["category-title-table"]
             table.rows[2].cells[1].text = ""
             table.rows[3].cells[0].text = language["description-title-table"]
@@ -185,9 +185,9 @@ class Report:
             table.rows[6].cells[0].text = language["impact-title-table"]
             table.rows[6].cells[1].text = ""
             table.rows[7].cells[0].text = language["CVSS-title-table"]
-            table.rows[7].cells[1].text = ""
+            table.rows[7].cells[1].text = vuln.cvss
             table.rows[8].cells[0].text = language["CVE-title-table"]
-            table.rows[8].cells[1].text = ""
+            table.rows[8].cells[1].text = vuln.cve
             table.rows[9].cells[0].text = language["effort-title-table"]
             table.rows[9].cells[1].text = ""
             table.rows[10].cells[0].text = language["management-title-table"]

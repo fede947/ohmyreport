@@ -2,6 +2,10 @@ import xlsxwriter
 from translate import translate
 
 NA = "N/A"
+CRITICAL = "Critical"
+HIGH = "High"
+MEDIUM = "Medium"
+LOW = "Low"
 
 class Vulnerabilidad:
 
@@ -17,7 +21,7 @@ class Vulnerabilidad:
 
     def mostrar(self):
         print("name: " + self.name)
-        print("level: " + self.level)
+        print("level: " + self.risk)
         print("cvss: " + self.cvss)
         print("description: \n" + self.descrip)
         print("synopsis: \n" + self.synopsis)
@@ -42,10 +46,31 @@ class Vulnerabilidad:
 
     def traducir(self, lang):
         self.solution = translate(self.solution, lang)
-        self.risk = translate(self.risk, lang)
+        #self.risk = translate(self.risk, lang)
+        #risk translated when writing
         self.descrip = translate(self.descrip, lang)
         self.synopsis = translate(self.synopsis, lang)
         self.name = translate(self.name, lang)
 
     def trimIp(self, ip):
         return ip.split()[0]
+
+    def __lt__(self, other):
+        if (self.risk == other.risk):
+            return self.cvss < other.cvss
+        else:
+            if (self.risk == CRITICAL):
+                return False
+            elif (self.risk == HIGH):
+                if (other.risk == CRITICAL):
+                    return True
+                return False
+            elif (self.risk == MEDIUM):
+                if (other.risk == CRITICAL or other.risk == HIGH):
+                    return True
+                return False
+            return True
+
+    def __eq__(self, other):
+        return (self.risk == other.risk and self.cvss == other.cvss)
+            

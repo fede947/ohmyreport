@@ -14,12 +14,18 @@ class XmlServiceDetecter:
             address = host.find("address")  
             for port in host.iter('port'):
                 service = port.find('service')
-                service_nombre = service.attrib.get("name","")
-                service_product = service.attrib.get("product","")
-                service_version = service.attrib.get("version","")
-                service_extrainfo = service.attrib.get("extrainfo","")
-                if (service_extrainfo != ""):
-                    service_extrainfo = "(" + service_extrainfo + ")"
+                if (service):
+                    service_nombre = service.attrib.get("name","")
+                    service_product = service.attrib.get("product","")
+                    service_version = service.attrib.get("version","")
+                    service_extrainfo = service.attrib.get("extrainfo","")
+                    if (service_extrainfo != ""):
+                        service_extrainfo = "(" + service_extrainfo + ")"
+                else:
+                    service_nombre = ""
+                    service_product = ""
+                    service_version = ""
+                    service_extrainfo = ""
                 self.serviceDetecter.add(address.attrib["addr"], port.attrib["portid"], 
                                     port.attrib["protocol"], 
                                     "{} {} {} {}".format(service_nombre, 

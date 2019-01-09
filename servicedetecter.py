@@ -4,9 +4,8 @@ import ipinfo
 import docx
 
 HEADER = 0
-HOSTNAME = 0
-IP = 1
-PUERTO = 2
+IP = 0
+PUERTO = 1
 
 class ServiceDetecter:
     
@@ -20,12 +19,11 @@ class ServiceDetecter:
         
     def write(self, document):
         #Armando la tabla de detalles
-        table = document.add_table(rows=1, cols=3)
-        table.rows[HEADER].cells[HOSTNAME].text = "URL"
+        table = document.add_table(rows=1, cols=2)
         table.rows[HEADER].cells[IP].text = "IP"
         table.rows[HEADER].cells[PUERTO].text = "PUERTO Y SERVICIO"
         for ip in self.ipsDict.values():
-            ip.write(table, HOSTNAME, IP, PUERTO)
+            ip.write(table, IP, PUERTO)
         
         
 

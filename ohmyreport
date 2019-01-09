@@ -24,16 +24,16 @@ def main():
     progressBar.mostrar()
 
     for vulnerabilidad in vulnerabilidadesParseadas:
-        vulnerabilidad.traducir(args.language)
-        vulnerabilidades.agregar(vulnerabilidad,excluir=['None','Info'])
+        vulnerabilidades.agregar(vulnerabilidad, ['None','Info'], args.language)
         progressBar.siguiente()
         if args.verbose:
             vulnerabilidad.mostrar()
 
+    vulnerabilidades.sort(reverse=True)
     print('')
     if(args.excel):
-            Report.toExcel(vulnerabilidades, args.output, args.language)
-            print('[+] Excel done')
+        Report.toExcel(vulnerabilidades, args.output, args.language)
+        print('[+] Excel done')
 
     if(args.word):
         Report.toWord(vulnerabilidades, args.output, args.language, args.client, args.nmap)

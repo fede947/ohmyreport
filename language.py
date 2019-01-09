@@ -2,9 +2,9 @@ class Language(dict):
 
     def __init__(self,language):
         if(language == 'es'):
-            self["identification-title"] = 'Identificacion'
+            self["identification-title"] = 'Identificación'
             self["vulnerability-title"] = 'Deteccion de vulnerabilidad'
-            self["exploitation-title"] = 'Explotacion'
+            self["exploitation-title"] = 'Explotación'
             self["detailed-title"] = 'Detalles y recomendaciones'
             self["vulnerability-title-table"] = 'Vulnerabilidad:'
             self["risk-title-table"] = 'Riesgo:'
@@ -33,10 +33,10 @@ Para cumplir con el objetivo planteado llevamos a cabo un Intento de intrusión 
             self["percentage"] = "Porcentaje de vulnerabilidades detectadas"
             self["percentage-paragraph"] = "Se han detectado {} vulnerabilidades, de las cuales {} han sido catalogadas como criticas, {} como altas, {} como medias, {} como bajas"
             self["cant"] = "Cantidad"
-            self["critical-risk"] = "Critico"
-            self["high-risk"] = "Alta"
-            self["medium-risk"] = "Media"
-            self["low-risk"] = "Baja"
+            self["Critical"] = "Crítico"
+            self["High"] = "Alto"
+            self["Medium"] = "Medio"
+            self["Low"] = "Bajo"
             self["observation"] = "Observaciones"
             self["conclutions"] = "Conclusiones"
             self["conclutions-paragraph"] = "Dado los objetivos y alcances definidos, surge que la infraestructura externa bajo análisis posee vulnerabilidades que permitirían a un atacante ingresar código arbitrario a servicios Web de la Compañía, comprometiendo la operatividad del mismo mediante ataques DoS y Fuerza Bruta."
@@ -120,10 +120,10 @@ Para cumplir con el objetivo planteado llevamos a cabo un Intento de intrusión 
             self["percentage"] = "Detected vulnerabilities percentage"
             self["percentage-paragraph"] = "Se han detectado {} vulnerabilidades, de las cuales {} han sido catalogadas como criticas, {} como altas, {} como medias, {} como bajas"
             self["cant"] = "Quantity"
-            self["critical-risk"] = "Critical"
-            self["high-risk"] = "High"
-            self["medium-risk"] = "Medium"
-            self["low-risk"] = "Low"
+            self["Critical"] = "Critical"
+            self["High"] = "High"
+            self["Medium"] = "Medium"
+            self["Low"] = "Low"
             self["observation"] = "Observations"
             self["conclutions"] = "Conclutions"
             self["conclutions-paragraph"] = "Dado los objetivos y alcances definidos, surge que la infraestructura externa bajo análisis posee vulnerabilidades que permitirían a un atacante ingresar código arbitrario a servicios Web de la Compañía, comprometiendo la operatividad del mismo mediante ataques DoS y Fuerza Bruta."
