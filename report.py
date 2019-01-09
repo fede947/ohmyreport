@@ -169,7 +169,7 @@ class Report:
             document.add_heading(language["detailed-title"],level=3)
 
             #Armando la tabla de detalles
-            table = document.add_table(rows=11, cols=2)
+            table = document.add_table(rows=10, cols=2)
             #Mergeo la primera fila de la tabla y le asigno el nombre de la vulnerabilidad
             table.rows[0].cells[0].merge(table.rows[0].cells[1]).text = vuln.name
             table.rows[1].cells[0].text = language["risk-title-table"]
@@ -190,8 +190,6 @@ class Report:
             table.rows[8].cells[1].text = vuln.cve
             table.rows[9].cells[0].text = language["effort-title-table"]
             table.rows[9].cells[1].text = ""
-            table.rows[10].cells[0].text = language["management-title-table"]
-            table.rows[10].cells[1].text = ""
 
 
             document.add_page_break()

@@ -87,7 +87,7 @@ Utilizando la información adquirida durante el escaneo de puertos y la obtenci�
             self["explotation-paragraph"] = "Los profesionales de BTR Consulting utilizaron la información recopilada en la fase de identificación de vulnerabilidades, para aplicar técnicas intrusivas con el objetivo de obtener acceso no autorizado a los hosts de la Compañía. Si bien no se detectaron vulnerabilidades que permitirían el acceso a los dispositivos de la redexpuesta de [empresa], se detectaron algunas vulnerabilidades y debilidades de configuración, que si bien no concluyeron en el compromiso de la integridad de la red externa, requieren de modificaciones con el objetivo de reforzar la seguridad del entorno de TI."
             self["recomendation"] = "Vulnerabilidades y recomendaciones asociadas"
             self["recomendation-paragraph"] = "Las siguientes son recomendaciones deberían ser aplicadas con el objetivo de mejorar la seguridad del ambiente de tecnología de la Compañía. Si bien las recomendaciones aquí expuestas han sido probadas por BTR Consulting, deberían ser probadas en horarios no productivos y entornos de prueba de [empresa]. Asimismo resulta recomendable disponer de full backups antes de implementar las recomendaciones aquí descritas, asegurando la correcta funcionalidad y continuidad del procesamiento."
-            self["ips"] = "Ips afectados"
+            self["ips"] = "Ips afectados:"
 
         if(language == 'en'):
             self["identification-title"] = 'Identification'
@@ -175,4 +175,4 @@ Utilizando la información adquirida durante el escaneo de puertos y la obtenci�
             self["explotation-paragraph"] = "Los profesionales de BTR Consulting utilizaron la información recopilada en la fase de identificación de vulnerabilidades, para aplicar técnicas intrusivas con el objetivo de obtener acceso no autorizado a los hosts de la Compañía. Si bien no se detectaron vulnerabilidades que permitirían el acceso a los dispositivos de la redexpuesta de {}, se detectaron algunas vulnerabilidades y debilidades de configuración, que si bien no concluyeron en el compromiso de la integridad de la red externa, requieren de modificaciones con el objetivo de reforzar la seguridad del entorno de TI."
             self["recomendation"] = "Vulnerabilities and associated recommendations"
             self["recomendation-paragraph"] = "Las siguientes son recomendaciones deberían ser aplicadas con el objetivo de mejorar la seguridad del ambiente de tecnología de la Compañía. Si bien las recomendaciones aquí expuestas han sido probadas por BTR Consulting, deberían ser probadas en horarios no productivos y entornos de prueba de {}. Asimismo resulta recomendable disponer de full backups antes de implementar las recomendaciones aquí descritas, asegurando la correcta funcionalidad y continuidad del procesamiento."
-            self["ips"] = "Affected ips"
+            self["ips"] = "Affected ips:"

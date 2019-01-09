@@ -6,6 +6,53 @@ import verbose
 from progressbar import ProgressBar
 from report import Report
 
+SI = "s"
+NO = "n"
+
+def showVulneraiblities(vulnerabilities):
+    for index, vuln in enumerate(vulnerabilities):
+        print("{} {}".format(index, vuln.name))
+
+def linkVulnerabilitiesSelection(vulnerabilities):
+    while(True):
+        entry = input("Ingrese numero de vulnerabilidades a unir sepadas por comas:")
+        vulnsNums = entry.split(",")
+        error = False
+        for index, vulnNum in enumerate(vulnsNums):
+            vulnsNums[index] = int(vulnNum)
+            if (vulnsNums[index] >= len(vulnerabilities)):
+                print("La entrada {} no es valida".format(entry))
+                print(index)
+                print(vulnsNums[index])
+                error = True
+                break
+        
+        if (error):
+            continue
+
+        name = input("Ingrese nuevo nombre para la vulnerabilidad:")
+        mainVulnNum = min(vulnsNums)
+        for vulnNum in vulnsNums:
+            if (vulnNum == mainVulnNum):
+                continue
+            vulnerabilities[mainVulnNum].link(vulnerabilities[vulnNum], name)
+            del vulnerabilities[vulnNum]
+        print("----------------------------------")
+        break
+            
+
+def linkVulnerabilitiesMenu(vulnerabilities):
+    while(True):
+        showVulneraiblities(vulnerabilities)
+        entrada = input("Desea unir alguna vulnerabilidad? [S/N]: ")
+        if (entrada.lower() == SI):
+            linkVulnerabilitiesSelection(vulnerabilities)
+        elif (entrada.lower() == NO):
+            break
+        else:
+            print("El caracter ingresado no es valido")
+
+
 def main():
     args = param.arguments()
 
@@ -30,6 +77,7 @@ def main():
             vulnerabilidad.mostrar()
 
     vulnerabilidades.sort(reverse=True)
+    linkVulnerabilitiesMenu(vulnerabilidades)
     print('')
     if(args.excel):
         Report.toExcel(vulnerabilidades, args.output, args.language)

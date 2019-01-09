@@ -1,5 +1,6 @@
 import xlsxwriter
 from translate import translate
+import os
 
 NA = "N/A"
 CRITICAL = "Critical"
@@ -13,7 +14,7 @@ class Vulnerabilidad:
         self.cve = NA
         self.cvss = NA
         self.risk = NA
-        self.ips = []
+        self.ips = set()
         self.name = NA
         self.synopsis = NA
         self.descrip = NA
@@ -30,18 +31,38 @@ class Vulnerabilidad:
             print(ip)
         print("--------------------------------------------------------------")
 
+    def link(self, other, name):
+        self.descrip = "{}:{} {}{}{}{}:{} {}".format(self.name, os.linesep, self.descrip, os.linesep, os.linesep, other.name, os.linesep, other.descrip)
+        self.synopsis = "{}:{} {}{}{}{}:{} {}".format(self.name, os.linesep, self.synopsis, os.linesep, os.linesep, other.name, os.linesep, other.synopsis)
+        self.solution = "{}:{} {}{}{}{}:{} {}".format(self.name, os.linesep, self.solution, os.linesep, os.linesep, other.name, os.linesep, other.solution)
+        if not (self.cve):
+            self.cve = other.cve
+        elif (other.cve and self.cve):
+            self.cve = "{}, {}".format(self.cve, other.cve)
+        self.ips = self.ips.union(other.ips)
+        self.cvss = max(self.cvss, other.cvss)
+        if (self.risk == HIGH):
+            if (other.risk == CRITICAL):
+                self.risk = CRITICAL
+        elif (self.risk == MEDIUM):
+            if (other.risk != LOW):
+                self.risk = other.risk
+        elif (self.risk == LOW):
+            self.risk = other.risk
+        self.name = name
+
     def set(self, row):
         if (self.name == NA):
             self.cve = row["CVE"]
             self.cvss = row["CVSS"]
             self.risk = row["Risk"]
-            self.ips.append("{} ({}/{})".format(row["Host"], row["Protocol"], row["Port"]))
+            self.ips.add("{} ({}/{})".format(row["Host"], row["Protocol"], row["Port"]))
             self.name = row["Name"]
             self.synopsis = row["Synopsis"]
             self.descrip = row["Description"]
             self.solution = row["Solution"]
         else:
-            self.ips.append("{} ({}/{})".format(row["Host"], row["Protocol"], row["Port"]))
+            self.ips.add("{} ({}/{})".format(row["Host"], row["Protocol"], row["Port"]))
 
 
     def traducir(self, lang):
