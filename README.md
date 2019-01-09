@@ -25,5 +25,5 @@ NESSUSFILE.csv: archivo csv exportado de Nessus
 
     ohmyreport NESSUSFILE.csv  -o FILENAME --language en reporte word y excel en ingles  
     ohmyreport NESSUSFILE.csv  -o FILENAME -w --language en reporte word ingles  
-    ohmyreport NESSUSFILE.csv  -o FILENAME --language es reporte excel en español  
+    ohmyreport NESSUSFILE.csv  -o FILENAME -e --language es reporte excel en español  
 
