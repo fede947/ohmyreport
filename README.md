@@ -21,7 +21,7 @@ Los posibles argumentos de ohmyreport son:
 -n: Agregrar la salida del escaneo de puertos realizado en nmap para anexarlo al reporte ejecutivo. El mismo se debe guardar en formato xml con el argumento -oX  
 NESSUSFILE.csv: archivo csv exportado de Nessus  
 
-##Ejemplos  
+## Ejemplos  
 
     ohmyreport NESSUSFILE.csv  -o FILENAME --language en reporte word y excel en ingles  
     ohmyreport NESSUSFILE.csv  -o FILENAME -w --language en reporte word ingles  
