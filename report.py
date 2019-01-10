@@ -81,7 +81,7 @@ class Report:
         Report.discovery(document, vulnerabilidades.ips(), title, client, nmap)
 
         Report.vulnerabilities(document, vulnerabilidades, title, client)
-        
+
         document.save(fileName + '.docx')
 
     def content(document, language):
@@ -125,7 +125,7 @@ class Report:
         document.add_paragraph(language["conclutions-paragraph"])
 
         document.add_page_break()
-    
+
     def discovery(document, ips, language, client, nmap):
         document.add_heading(language["security-evaluation"])
         document.add_heading(language["discovery"], level=3)
@@ -160,16 +160,21 @@ class Report:
 
         for vuln in vulnerabilities:
             document.add_heading(vuln.name)
-            document.add_heading(language["identification-title"],level=3)
+            r = document.add_paragraph().add_run(language["identification-title"])
+            Report.addFormatRun(r)
             document.add_paragraph(vuln.synopsis)
-            document.add_heading(language["vulnerability-title"],level=3)
+            r = document.add_paragraph().add_run(language["vulnerability-title"])
+            Report.addFormatRun(r)
             document.add_paragraph("Detection here")
-            document.add_heading(language["exploitation-title"],level=3)
+            r = document.add_paragraph().add_run(language["exploitation-title"])
+            Report.addFormatRun(r)
             document.add_paragraph(language["exploit-subtitle"])
-            document.add_heading(language["detailed-title"],level=3)
+            r = document.add_paragraph().add_run(language["detailed-title"])
+            Report.addFormatRun(r)
 
             #Armando la tabla de detalles
             table = document.add_table(rows=10, cols=2)
+            table.style = 'TablaBTR'
             #Mergeo la primera fila de la tabla y le asigno el nombre de la vulnerabilidad
             table.rows[0].cells[0].merge(table.rows[0].cells[1]).text = vuln.name
             table.rows[1].cells[0].text = language["risk-title-table"]
@@ -194,4 +199,6 @@ class Report:
 
             document.add_page_break()
 
-
+    def addFormatRun(r):
+        r.underline = True
+        r.bold = True
