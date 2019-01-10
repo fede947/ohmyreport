@@ -6,16 +6,16 @@ class Language(dict):
             self["vulnerability-title"] = 'Deteccion de vulnerabilidad'
             self["exploitation-title"] = 'Explotación'
             self["detailed-title"] = 'Detalles y recomendaciones'
-            self["vulnerability-title-table"] = 'Vulnerabilidad:'
-            self["risk-title-table"] = 'Riesgo:'
-            self["description-title-table"] = 'Descripción:'
-            self["solution-title-table"] = 'Recomendación:'
-            self["impact-title-table"] = 'Impacto de Negocio:'
-            self["management-title-table"] = 'Respuesta gerencial:'
-            self["category-title-table"] = "Categoria:"
-            self["CVSS-title-table"] = "CVSS score:"
-            self["CVE-title-table"] = "CVE:"
-            self["effort-title-table"] = "Esfuerzo para repararla:"
+            self["vulnerability-title-table"] = 'Vulnerabilidad'
+            self["risk-title-table"] = 'Riesgo'
+            self["description-title-table"] = 'Descripción'
+            self["solution-title-table"] = 'Recomendación'
+            self["impact-title-table"] = 'Impacto de Negocio'
+            self["management-title-table"] = 'Respuesta gerencial'
+            self["category-title-table"] = "Categoria"
+            self["CVSS-title-table"] = "CVSS score"
+            self["CVE-title-table"] = "CVE"
+            self["effort-title-table"] = "Esfuerzo para repararla"
             self["exploit-subtitle"] = 'Vulnerabilidad no explotada'
             self["content"] = "Contenido"
             self["executive-summary"] = "Reporte ejecutivo"
@@ -77,7 +77,7 @@ Trace utiliza paquetes ICMP los cuales en muchos casos se encuentran filtrados p
 
 La identificación del sistema operativo es realizada por medio de técnicas de TCP/IP “OS fingerprinting”. Abusando de las diferentes formas en que las empresas de software implementan el “stack” de TCP/IP, las herramientas de escaneo realizan una comparación de estos stacks contra una base de datos, determinando así el tipo y versión de los sistemas operativos.
 
-La técnica de “Banner acquisition” permite recopilar información adicional, con el fin de identificar de una manera más certera el sistema operativo que se ejecuta en cada host. Una vez recopilada dicha información, es posible relacionarla con una vulnerabilidad propia de cada sistema operativo. 
+La técnica de “Banner acquisition” permite recopilar información adicional, con el fin de identificar de una manera más certera el sistema operativo que se ejecuta en cada host. Una vez recopilada dicha información, es posible relacionarla con una vulnerabilidad propia de cada sistema operativo.
 
 Dado que los puertos de comunicación representan una potencial vía de acceso, los profesionales de BTR Consulting realizaron un escaneo de puertos utilizando técnicas de evasión de sistemas de detección de intrusos (IDS) para identificar aquellos que se encuentran abiertos, con el fin de hallar potenciales vulnerabilidades asociadas a los mismos.
 
@@ -87,23 +87,23 @@ Utilizando la información adquirida durante el escaneo de puertos y la obtenci�
             self["explotation-paragraph"] = "Los profesionales de BTR Consulting utilizaron la información recopilada en la fase de identificación de vulnerabilidades, para aplicar técnicas intrusivas con el objetivo de obtener acceso no autorizado a los hosts de la Compañía. Si bien no se detectaron vulnerabilidades que permitirían el acceso a los dispositivos de la redexpuesta de [empresa], se detectaron algunas vulnerabilidades y debilidades de configuración, que si bien no concluyeron en el compromiso de la integridad de la red externa, requieren de modificaciones con el objetivo de reforzar la seguridad del entorno de TI."
             self["recomendation"] = "Vulnerabilidades y recomendaciones asociadas"
             self["recomendation-paragraph"] = "Las siguientes son recomendaciones deberían ser aplicadas con el objetivo de mejorar la seguridad del ambiente de tecnología de la Compañía. Si bien las recomendaciones aquí expuestas han sido probadas por BTR Consulting, deberían ser probadas en horarios no productivos y entornos de prueba de [empresa]. Asimismo resulta recomendable disponer de full backups antes de implementar las recomendaciones aquí descritas, asegurando la correcta funcionalidad y continuidad del procesamiento."
-            self["ips"] = "Ips afectados:"
+            self["ips"] = "Ips afectados"
 
         if(language == 'en'):
             self["identification-title"] = 'Identification'
             self["vulnerability-title"] = 'Vulnerability detection'
             self["exploitation-title"] = 'Exploitation'
             self["detailed-title"] = 'Detailed findings and recommendations'
-            self["vulnerability-title-table"] = 'Vulnerability:'
-            self["risk-title-table"] = 'Risk Factor:'
-            self["description-title-table"] = 'Description:'
-            self["solution-title-table"] = 'Recommendations:'
-            self["impact-title-table"] = 'Business impact:'
-            self["management-title-table"] = 'Gerential management:'
-            self["category-title-table"] = "Category:"
-            self["CVSS-title-table"] = "CVSS score:"
-            self["CVE-title-table"] = "CVE:"
-            self["effort-title-table"] = "Effort to fix:"
+            self["vulnerability-title-table"] = 'Vulnerability'
+            self["risk-title-table"] = 'Risk Factor'
+            self["description-title-table"] = 'Description'
+            self["solution-title-table"] = 'Recommendations'
+            self["impact-title-table"] = 'Business impact'
+            self["management-title-table"] = 'Gerential management'
+            self["category-title-table"] = "Category"
+            self["CVSS-title-table"] = "CVSS score"
+            self["CVE-title-table"] = "CVE"
+            self["effort-title-table"] = "Effort to fix"
             self["exploit-subtitle"] = 'Vulnerability no exploited'
             self["content"] = "Content"
             self["executive-summary"] = "Executive summary"
@@ -175,4 +175,4 @@ Using the information acquired during the port scanning and the acquisition of b
             self["explotation-paragraph"] = "BTR Consulting's professionals used the information gathered in the vulnerability identification phase to apply intrusive techniques in order to obtain unauthorized access to the Company's hosts. Although no vulnerabilities were detected that would allow access to the devices of the redexposed {}, some vulnerabilities and weaknesses of configuration were detected, which although they did not conclude in the commitment of the integrity of the external network, require modifications with the objective of reinforcing the security of the IT environment."
             self["recomendation"] = "Vulnerabilities and associated recommendations"
             self["recomendation-paragraph"] = "The following recommendations should be implemented with the objective of improving the safety of the Company's technology environment. While the recommendations herein have been tested by BTR Consulting, they should be tested in non-productive schedules and {} test environments. It is also advisable to have full backups before implementing the recommendations described here, ensuring proper functionality and continuity of processing."
-            self["ips"] = "Affected ips:"
+            self["ips"] = "Affected ips"

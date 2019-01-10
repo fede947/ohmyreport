@@ -4,6 +4,11 @@ from language import *
 import os
 import xmlservicedetecter
 import servicedetecter
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
+
+TablaVulnerabilidades = 'Tabla Vulnerabilidades'
+tablaResumenVulnerabilidades = 'Tabla Vulnerabilidades 2'
 
 class Report:
 
@@ -81,7 +86,7 @@ class Report:
         Report.discovery(document, vulnerabilidades.ips(), title, client, nmap)
 
         Report.vulnerabilities(document, vulnerabilidades, title, client)
-        
+
         document.save(fileName + '.docx')
 
     def content(document, language):
@@ -92,7 +97,6 @@ class Report:
         document.add_heading(language["executive-summary"])
         document.add_heading(language["introduction"], level=3)
         document.add_paragraph("{}{}".format(client, language["introduction-paragraph"]))
-
         document.add_heading(language["objetive"], level=3)
         document.add_paragraph(language["objetive-paragraph"])
         document.add_paragraph('\n'.join(vulnerabilities.ips()))
@@ -100,6 +104,7 @@ class Report:
         document.add_heading(language["percentage"], level=3)
         document.add_paragraph(language["percentage-paragraph"].format(len(vulnerabilities), vulnerabilities.count('Critical'), vulnerabilities.count('High'), vulnerabilities.count('Medium'), vulnerabilities.count('Low')))
         cantTable = document.add_table(rows=5, cols=2)
+        cantTable.style = tablaResumenVulnerabilidades
         cantTable.rows[0].cells[0].text = language["risk-title-table"]
         cantTable.rows[0].cells[1].text = language["cant"]
         cantTable.rows[1].cells[0].text = language["Critical"]
@@ -112,6 +117,7 @@ class Report:
         cantTable.rows[4].cells[1].text = str(vulnerabilities.count('Low'))
         document.add_paragraph("")
         descriptionTable = document.add_table(rows=len(vulnerabilities)+1, cols=3)
+        descriptionTable.style = tablaResumenVulnerabilidades
         descriptionTable.rows[0].cells[0].text = "#"
         descriptionTable.rows[0].cells[1].text = language["observation"]
         descriptionTable.rows[0].cells[2].text = language["risk-title-table"]
@@ -125,7 +131,7 @@ class Report:
         document.add_paragraph(language["conclutions-paragraph"])
 
         document.add_page_break()
-    
+
     def discovery(document, ips, language, client, nmap):
         document.add_heading(language["security-evaluation"])
         document.add_heading(language["discovery"], level=3)
@@ -163,6 +169,7 @@ class Report:
             document.add_heading(language["identification-title"],level=3)
             document.add_paragraph(vuln.synopsis)
             document.add_heading(language["vulnerability-title"],level=3)
+
             document.add_paragraph("Detection here")
             document.add_heading(language["exploitation-title"],level=3)
             document.add_paragraph(language["exploit-subtitle"])
@@ -170,6 +177,7 @@ class Report:
 
             #Armando la tabla de detalles
             table = document.add_table(rows=10, cols=2)
+            table.style = TablaVulnerabilidades
             #Mergeo la primera fila de la tabla y le asigno el nombre de la vulnerabilidad
             table.rows[0].cells[0].merge(table.rows[0].cells[1]).text = vuln.name
             table.rows[1].cells[0].text = language["risk-title-table"]
@@ -193,5 +201,3 @@ class Report:
 
 
             document.add_page_break()
-
-
