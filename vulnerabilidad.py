@@ -1,6 +1,7 @@
 import xlsxwriter
 from translate import translate
 import os
+import ipinfo
 
 NA = "N/A"
 CRITICAL = "Critical"
@@ -14,7 +15,7 @@ class Vulnerabilidad:
         self.cve = NA
         self.cvss = NA
         self.risk = NA
-        self.ips = set()
+        self.ips = {}
         self.name = NA
         self.synopsis = NA
         self.descrip = NA
@@ -59,14 +60,17 @@ class Vulnerabilidad:
             self.cve = row["CVE"]
             self.cvss = row["CVSS"]
             self.risk = row["Risk"]
-            self.ips.add("{} ({}/{})".format(row["Host"], row["Protocol"], row["Port"]))
+            ip = ipinfo.IpInfo(row["Host"])
+            ip.add(row["Port"], row["Protocol"], "")
+            self.ips[row["Host"]] = ip
             self.name = row["Name"]
             self.synopsis = row["Synopsis"]
             self.descrip = row["Description"]
             self.solution = row["Solution"]
         else:
-            self.ips.add("{} ({}/{})".format(row["Host"], row["Protocol"], row["Port"]))
-
+            ip = self.ips.get(row["Host"], ipinfo.IpInfo(row["Host"]))
+            ip.add(row["Port"], row["Protocol"], "")
+            self.ips[row["Host"]] = ip
 
     def traducir(self, lang):
         self.solution = translate(self.solution, lang)
@@ -75,9 +79,6 @@ class Vulnerabilidad:
         self.descrip = translate(self.descrip, lang)
         self.synopsis = translate(self.synopsis, lang)
         self.name = translate(self.name, lang)
-
-    def trimIp(self, ip):
-        return ip.split()[0]
 
     def __lt__(self, other):
         if (self.risk == other.risk):

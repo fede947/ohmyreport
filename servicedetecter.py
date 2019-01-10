@@ -22,7 +22,9 @@ class ServiceDetecter:
         table = document.add_table(rows=1, cols=2)
         table.rows[HEADER].cells[IP].text = "IP"
         table.rows[HEADER].cells[PUERTO].text = "PUERTO Y SERVICIO"
-        for ip in self.ipsDict.values():
+        ipList = list(self.ipsDict.values())
+        ipList.sort()
+        for ip in ipList:
             ip.write(table, IP, PUERTO)
         
         

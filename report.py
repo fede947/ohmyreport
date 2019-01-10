@@ -179,7 +179,7 @@ class Report:
             table.rows[3].cells[0].text = language["description-title-table"]
             table.rows[3].cells[1].text = vuln.descrip
             table.rows[4].cells[0].text = language["ips"]
-            table.rows[4].cells[1].text = '\n'.join(vuln.ips)
+            table.rows[4].cells[1].text = (os.linesep).join([str(ip) for ip in vuln.ips.values()])
             table.rows[5].cells[0].text = language["solution-title-table"]
             table.rows[5].cells[1].text = vuln.solution
             table.rows[6].cells[0].text = language["impact-title-table"]

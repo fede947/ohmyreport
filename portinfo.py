@@ -14,3 +14,6 @@ class PortInfo:
         
     def __str__(self):
         return "{}/{} {}".format(self.port, self.protocol, self.service)
+
+    def strIp(self, ip):
+        return "{} ({}/{})".format(ip, self.port, self.protocol)
