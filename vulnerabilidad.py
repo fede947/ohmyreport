@@ -51,6 +51,9 @@ class Vulnerabilidad:
             self.risk = other.risk
         self.name = name
 
+    def changeName(self, name):
+        self.name = name
+
     def set(self, row):
         if (self.name == NA):
             self.cve = row["CVE"]
