@@ -19,7 +19,6 @@ def main():
 
     print('[+] Loading report...')
     vulnerabilidadesParseadas = csvParser.getAllVuln()
-    print('')
     print('[+] ' + str(len(vulnerabilidadesParseadas)) + ' vulnerabilities.')
     print('')
 

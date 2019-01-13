@@ -74,8 +74,6 @@ class Vulnerabilidad:
 
     def traducir(self, lang):
         self.solution = translate(self.solution, lang)
-        #self.risk = translate(self.risk, lang)
-        #risk translated when writing
         self.descrip = translate(self.descrip, lang)
         self.synopsis = translate(self.synopsis, lang)
         self.name = translate(self.name, lang)
@@ -98,4 +96,3 @@ class Vulnerabilidad:
 
     def __eq__(self, other):
         return (self.risk == other.risk and self.cvss == other.cvss)
-            

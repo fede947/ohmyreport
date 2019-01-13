@@ -3,6 +3,7 @@ NO = "n"
 
 def start(vulnerabilities):
     changeNameMenu(vulnerabilities)
+    delete(vulnerabilities)
     linkVulnerabilitiesMenu(vulnerabilities)
 
 def showVulnerabilities(vulnerabilities):
@@ -11,7 +12,7 @@ def showVulnerabilities(vulnerabilities):
 
 def linkVulnerabilitiesSelection(vulnerabilities):
     while(True):
-        entry = input("Ingrese numero de vulnerabilidades a unir sepadas por comas:")
+        entry = input("Ingrese numero de vulnerabilidades a unir separadas por comas:")
         vulnsNums = entry.split(",")
         error = False
         for index, vulnNum in enumerate(vulnsNums):
@@ -70,3 +71,15 @@ def changeNameMenu(vulnerabilities):
         else:
             print("El caracter ingresado no es valido")
             print("----------------------------------")
+
+
+
+def delete(vulnerabilities):
+    showVulnerabilities(vulnerabilities)
+    entrada = input("Desea eliminar alguna alguna vulnerabilidad? [S/N]: ")
+    if (entrada.lower() == SI):
+        entry = input("Ingrese numero de vulnerabilidades a eliminar separadas por comas:")
+        vulnsNums = entry.split(",")
+        vulnsNums.sort(reverse=True)
+        for index in vulnsNums:
+            del vulnerabilities[int(index)]

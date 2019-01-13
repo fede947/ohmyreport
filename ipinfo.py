@@ -5,13 +5,13 @@ import socket
 import os
 
 class IpInfo:
-    
+
     def __init__(self, ip):
         self.ip = ip
         self.os = ""
         self.puertos = {}
-        
-    def add(self, port, protocol, service):
+
+    def add(self, port, protocol, service=""):
         portInfo = self.puertos.get(port, portinfo.PortInfo(port))
         portInfo.add(protocol, service)
         self.puertos[port] = portInfo
@@ -30,7 +30,7 @@ class IpInfo:
             elif (int(parsedSelf[i]) > int(parsedOther[i])):
                 return False
         return False
-    
+
     def write(self, table, ip_idx, port_idx):
         row_cells = table.add_row().cells
         row_cells[ip_idx].text = self.ip
