@@ -5,7 +5,7 @@ class Language(dict):
     def __init__(self,language):
         if(language == 'es'):
             self["identification-title"] = 'Identificación'
-            self["vulnerability-title"] = 'Deteccion de vulnerabilidad'
+            self["vulnerability-title"] = 'Detección de vulnerabilidad'
             self["exploitation-title"] = 'Explotación'
             self["detailed-title"] = 'Detalles y recomendaciones'
             self["vulnerability-title-table"] = 'Vulnerabilidad'
@@ -14,7 +14,7 @@ class Language(dict):
             self["solution-title-table"] = 'Recomendación'
             self["impact-title-table"] = 'Impacto de Negocio'
             self["management-title-table"] = 'Respuesta gerencial'
-            self["category-title-table"] = "Categoria"
+            self["category-title-table"] = "Categoría"
             self["CVSS-title-table"] = "CVSS score"
             self["CVE-title-table"] = "CVE"
             self["effort-title-table"] = "Esfuerzo para repararla"
@@ -26,7 +26,7 @@ class Language(dict):
             self["objetive"]= "Objetivo y alcance"
             self["objetive-paragraph"] = "El objetivo del presente proyecto consistió en la identificación del grado de exposición a las amenazas y vulnerabilidades de seguridad de la infraestructura expuesta a internet de la organización."+report.linesep+"Para cumplir con el objetivo planteado llevamos a cabo un Intento de intrusión externo sobre los siguientes rangos de direcciones IP provistas por la compañía:"
             self["percentage"] = "Porcentaje de vulnerabilidades detectadas"
-            self["percentage-paragraph"] = "Se han detectado {} vulnerabilidades, de las cuales {} han sido catalogadas como criticas, {} como altas, {} como medias, {} como bajas"
+            self["percentage-paragraph"] = "Se han detectado {} vulnerabilidades, de las cuales se han clasificado según su factor de riesgo {} de riesgo critico, {} de riesgo alto, {} de riesgo medio y {} de riesgo bajo"
             self["cant"] = "Cantidad"
             self["Critical"] = "Crítico"
             self["High"] = "Alto"
@@ -34,7 +34,7 @@ class Language(dict):
             self["Low"] = "Bajo"
             self["observation"] = "Observaciones"
             self["conclutions"] = "Conclusiones"
-            self["conclutions-paragraph"] = "Dado los objetivos y alcances definidos, surge que la infraestructura externa bajo análisis posee vulnerabilidades que permitirían a un atacante ingresar código arbitrario a servicios Web de la Compañía, comprometiendo la operatividad del mismo mediante ataques DoS y Fuerza Bruta."
+            self["conclutions-paragraph"] = "Dado los objetivos y alcances definidos, surge que la infraestructura externa bajo análisis posee vulnerabilidades que comprometen la operatividad de la misma."
             self["security-evaluation"] = "Evaluación de seguridad del perimitro externo"
             self["discovery"] = "Discovery"
             self["discovery-paragraph-1"] = "El equipo de profesionales de BTR Consulting utilizó herramientas públicas disponibles y propias para analizar el perfil de la arquitectura de {} conectada a Internet, utilizando las siguientes direcciones IP provistas por la compañía:"
@@ -51,9 +51,9 @@ class Language(dict):
             self["vulnerabilities-identification"] = "Identificación de vulnerabilidades"
             self["vulnerabilities-identification-paragraph"] = "Se realizó un escaneo a las direcciones identificadas durante la Fase 1 con herramientas propias y con otras de uso público, con el propósito de determinar los sistemas operativos y servicios habilitados en la red de la Compañía. Luego se realizó un “Banner acquisition” para determinar los sistemas y versiones del software que se ejecutan en los hosts."+report.linesep+""+report.linesep+"La identificación del sistema operativo es realizada por medio de técnicas de TCP/IP “OS fingerprinting”. Abusando de las diferentes formas en que las empresas de software implementan el “stack” de TCP/IP, las herramientas de escaneo realizan una comparación de estos stacks contra una base de datos, determinando así el tipo y versión de los sistemas operativos."+report.linesep+""+report.linesep+"La técnica de “Banner acquisition” permite recopilar información adicional, con el fin de identificar de una manera más certera el sistema operativo que se ejecuta en cada host. Una vez recopilada dicha información, es posible relacionarla con una vulnerabilidad propia de cada sistema operativo."+report.linesep+""+report.linesep+"Dado que los puertos de comunicación representan una potencial vía de acceso, los profesionales de BTR Consulting realizaron un escaneo de puertos utilizando técnicas de evasión de sistemas de detección de intrusos (IDS) para identificar aquellos que se encuentran abiertos, con el fin de hallar potenciales vulnerabilidades asociadas a los mismos."+report.linesep+""+report.linesep+"Utilizando la información adquirida durante el escaneo de puertos y la obtención de banners, los profesionales de BTR Consulting realizaron una búsqueda de vulnerabilidades utilizando herramientas propias, otras disponibles en Internet y técnicas manuales a fin de poder detectar las debilidades existentes en los puertos abiertos."
             self["explotation"] = "Explotación"
-            self["explotation-paragraph"] = "Los profesionales de BTR Consulting utilizaron la información recopilada en la fase de identificación de vulnerabilidades, para aplicar técnicas intrusivas con el objetivo de obtener acceso no autorizado a los hosts de la Compañía. Si bien no se detectaron vulnerabilidades que permitirían el acceso a los dispositivos de la redexpuesta de [empresa], se detectaron algunas vulnerabilidades y debilidades de configuración, que si bien no concluyeron en el compromiso de la integridad de la red externa, requieren de modificaciones con el objetivo de reforzar la seguridad del entorno de TI."
+            self["explotation-paragraph"] = "Los profesionales de BTR Consulting utilizaron la información recopilada en la fase de identificación de vulnerabilidades, para aplicar técnicas intrusivas con el objetivo de obtener acceso no autorizado a los hosts de la Compañía. Las técnicas intrusivas que serán aplicadas son aquellas que son públicas para cualquier persona, ya que se encuentran disponibles en Internet y no es necesaria la adquisición de los mismos. Además, se verificará atentamente que los mismos no comprometan la integridad de la red, como por ejemplo con una denegación de servicio, y tampoco impliquen la obtención de información privada, como contraseñas obtenidas por medio de un ataque del tipo man in the middle."
             self["recomendation"] = "Vulnerabilidades y recomendaciones asociadas"
-            self["recomendation-paragraph"] = "Las siguientes son recomendaciones deberían ser aplicadas con el objetivo de mejorar la seguridad del ambiente de tecnología de la Compañía. Si bien las recomendaciones aquí expuestas han sido probadas por BTR Consulting, deberían ser probadas en horarios no productivos y entornos de prueba de [empresa]. Asimismo resulta recomendable disponer de full backups antes de implementar las recomendaciones aquí descritas, asegurando la correcta funcionalidad y continuidad del procesamiento."
+            self["recomendation-paragraph"] = "Las siguientes son recomendaciones deberían ser aplicadas con el objetivo de mejorar la seguridad del ambiente de tecnología de la Compañía. Si bien las recomendaciones aquí expuestas han sido probadas por BTR Consulting, deberían ser probadas en horarios no productivos y entornos de prueba de {}. Asimismo resulta recomendable disponer de full backups antes de implementar las recomendaciones aquí descritas, asegurando la correcta funcionalidad y continuidad del procesamiento."
             self["ips"] = "Ips afectados"
 
         if(language == 'en'):

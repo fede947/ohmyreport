@@ -31,6 +31,12 @@ class IpInfo:
                 return False
         return False
 
+    def link(self, other):
+        if not(other):
+            return
+        # Hay que hacer un link de puertos
+        self.puertos.update(other.puertos)
+    
     def write(self, table, ip_idx, port_idx):
         row_cells = table.add_row().cells
         row_cells[ip_idx].text = self.ip

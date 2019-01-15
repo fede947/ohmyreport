@@ -40,7 +40,10 @@ class Vulnerabilidad:
             self.cve = other.cve
         elif (other.cve and self.cve):
             self.cve = "{}, {}".format(self.cve, other.cve)
-        self.ips = self.ips.union(other.ips)
+        for ipOther in other.ips.values():
+            ipSelf = self.ips.get(ipOther.ip, None)
+            ipOther.link(ipSelf)
+            self.ips[ipOther.ip] = ipOther
         self.cvss = max(self.cvss, other.cvss)
         if (self.risk == HIGH):
             if (other.risk == CRITICAL):
