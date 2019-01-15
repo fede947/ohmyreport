@@ -7,6 +7,7 @@ import servicedetecter
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
+linesep = "\n"
 TablaVulnerabilidades = 'Tabla Vulnerabilidades'
 tablaResumenVulnerabilidades = 'Tabla Vulnerabilidades 2'
 
