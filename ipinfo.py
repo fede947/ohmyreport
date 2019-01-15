@@ -5,13 +5,13 @@ import socket
 import os
 
 class IpInfo:
-    
+
     def __init__(self, ip):
         self.ip = ip
         self.os = ""
         self.puertos = {}
-        
-    def add(self, port, protocol, service):
+
+    def add(self, port, protocol, service=""):
         portInfo = self.puertos.get(port, portinfo.PortInfo(port))
         portInfo.add(protocol, service)
         self.puertos[port] = portInfo

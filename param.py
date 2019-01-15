@@ -9,6 +9,7 @@ def arguments():
     parser.add_argument('-o','--output', help="output file (default: NessusFile's name)", metavar='FILE')
     parser.add_argument('-l','--language', help="language of the file (default: english)", choices=['en','es'], default='en')
     parser.add_argument('-c','--client', help="client name", default='[empresa]')
+    parser.add_argument('-i','--interactive', help="interactive mode (rename, merge and delete vulnerabilities)", action='store_true')
     parser.add_argument('-n','--nmap', help="nmap port scan xml output")
 
     parser.add_argument('file', metavar='NessusFile')
