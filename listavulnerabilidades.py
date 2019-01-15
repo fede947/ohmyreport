@@ -5,7 +5,7 @@ class ListaVulnerabilidades(list):
 
     def agregar(self, vuln, excluir, language):
         for ip in vuln.ips.values():
-            if not(ip in self.TotalIps):
+            if not ip in self.TotalIps:
                 self.TotalIps.append(ip)
 
         if vuln.risk not in excluir:
@@ -26,3 +26,6 @@ class ListaVulnerabilidades(list):
     def ips(self):
         self.TotalIps.sort()
         return [ipInfo.ip for ipInfo in self.TotalIps]
+
+    def getIps(self):
+        return self.TotalIps

@@ -83,7 +83,7 @@ class Report:
 
         Report.executiveSummary(document, vulnerabilidades, title, client)
 
-        Report.discovery(document, vulnerabilidades.ips(), title, client, nmap)
+        Report.discovery(document, vulnerabilidades, title, client, nmap)
 
         Report.vulnerabilities(document, vulnerabilidades, title, client)
 
@@ -132,11 +132,11 @@ class Report:
 
         document.add_page_break()
 
-    def discovery(document, ips, language, client, nmap):
+    def discovery(document, vulnerabilities, language, client, nmap):
         document.add_heading(language["security-evaluation"])
         document.add_heading(language["discovery"], level=3)
         document.add_paragraph(language["discovery-paragraph-1"].format(client))
-        document.add_paragraph((os.linesep).join(ips))
+        document.add_paragraph((os.linesep).join(vulnerabilities.ips()))
         document.add_paragraph(language["discovery-paragraph-2"])
         document.add_heading(language["nslookup"], level=3)
         document.add_paragraph(language["nslookup-paragraph"])
@@ -147,14 +147,23 @@ class Report:
         document.add_heading(language["port-scan"], level=3)
         document.add_paragraph(language["port-scan-paragraph"])
 
-        Report.scanTable(document, nmap)
-        document.add_page_break()
+        Report.scanTable(document, vulnerabilities, nmap) #FIXIT evitar pasar los datos de nmap al reporte
+        document.add_page_break()                         #      y que complete las vulnerabilidades desde el archivo ohmyreport
 
-    def scanTable(document, nmap):
+    def scanTable(document, vulnerabilities, nmap):
         if (nmap):
             serviceDetecter = servicedetecter.ServiceDetecter()
             xmlServiceDetecter = xmlservicedetecter.XmlServiceDetecter(serviceDetecter, nmap)
             serviceDetecter.write(document)
+        else:
+            ipsInfo = vulnerabilities.getIps()
+            table = document.add_table(rows=1, cols=2)
+            #table.style = TablaIPPuerto
+            table.rows[0].cells[0].text = "IP"
+            table.rows[0].cells[1].text = "PUERTO Y SERVICIO"
+            for ip in ipsInfo:
+                ip.write(table,0,1)
+
 
     def vulnerabilities(document, vulnerabilities, language, client):
         document.add_heading(language["vulnerabilities-identification"])
