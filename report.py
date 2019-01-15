@@ -6,6 +6,7 @@ import xmlservicedetecter
 import servicedetecter
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
+from docx.shared import Cm
 
 TablaVulnerabilidades = 'Tabla Vulnerabilidades'
 tablaResumenVulnerabilidades = 'Tabla Vulnerabilidades 2'
@@ -96,15 +97,19 @@ class Report:
     def executiveSummary(document, vulnerabilities, language, client):
         document.add_heading(language["executive-summary"])
         document.add_heading(language["introduction"], level=3)
-        document.add_paragraph("{}{}".format(client, language["introduction-paragraph"]))
+        document.add_paragraph(language["introduction-paragraph"].format(client))
         document.add_heading(language["objetive"], level=3)
         document.add_paragraph(language["objetive-paragraph"])
-        document.add_paragraph('\n'.join(vulnerabilities.ips()))
+        document.add_paragraph(os.linesep.join(vulnerabilities.ips()))
 
         document.add_heading(language["percentage"], level=3)
         document.add_paragraph(language["percentage-paragraph"].format(len(vulnerabilities), vulnerabilities.count('Critical'), vulnerabilities.count('High'), vulnerabilities.count('Medium'), vulnerabilities.count('Low')))
         cantTable = document.add_table(rows=5, cols=2)
         cantTable.style = tablaResumenVulnerabilidades
+        cantTable.autofit = False
+        for i in range(0,2):
+            for cell in cantTable.columns[i].cells:
+                cell.width = Cm(3)
         cantTable.rows[0].cells[0].text = language["risk-title-table"]
         cantTable.rows[0].cells[1].text = language["cant"]
         cantTable.rows[1].cells[0].text = language["Critical"]
@@ -118,6 +123,13 @@ class Report:
         document.add_paragraph("")
         descriptionTable = document.add_table(rows=len(vulnerabilities)+1, cols=3)
         descriptionTable.style = tablaResumenVulnerabilidades
+        descriptionTable.autofit = False
+        for cell in descriptionTable.columns[0].cells:
+            cell.width = Cm(1)
+        for cell in descriptionTable.columns[1].cells:
+            cell.width = Cm(11.5)
+        for cell in descriptionTable.columns[2].cells:
+            cell.width = Cm(2.5)
         descriptionTable.rows[0].cells[0].text = "#"
         descriptionTable.rows[0].cells[1].text = language["observation"]
         descriptionTable.rows[0].cells[2].text = language["risk-title-table"]
