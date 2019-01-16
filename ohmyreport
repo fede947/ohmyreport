@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from listavulnerabilidades import ListaVulnerabilidades
-import parser
+import nessusparser
 import param
 import verbose
 import interface
@@ -13,7 +13,7 @@ from report import Report
 def main():
     args = param.arguments()
 
-    csvParser = parser.CsvParser(args.file)
+    csvParser = nessusparser.CsvParser(args.file)
 
     vulnerabilidades = ListaVulnerabilidades()
 

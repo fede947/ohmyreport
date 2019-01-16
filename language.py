@@ -20,16 +20,14 @@ class Language(dict):
             self["content"] = "Contenido"
             self["executive-summary"] = "Reporte ejecutivo"
             self["introduction"] = "Introducción"
-            self["introduction-paragraph"] = """{} ha solicitado a BTR Consulting efectuar una evaluación de seguridad a su infraestructura expuesta a internet. El propósito de esta evaluación consistió en brindar asistencia a la compañía en la evaluación del riesgo general de los accesos no autorizados a los activos de Tecnología Informática y la información contenida o gestionada por los mismos. Se trataron de identificar vulnerabilidades que permitieran, alguna de las siguientes acciones:
-            Robo de identidad para defraudar o comprometer a la Organización o a sus usuarios,
-            Obtención y accesos por medio de usuarios no autorizados con atributos para crear, acceder o borrar información,
-            Posibilidad de lograr el acceso para la administración de los componentes que conforman la red de la Organización,
-            Acceso a información disponible a usuarios no autorizados sobre la infraestructura tecnológica y su configuración.
-            """
+            self["introduction-paragraph-1"] = "ha solicitado a BTR Consulting efectuar una evaluación de seguridad a su infraestructura expuesta a internet. El propósito de esta evaluación consistió en brindar asistencia a la compañía en la evaluación del riesgo general de los accesos no autorizados a los activos de Tecnología Informática y la información contenida o gestionada por los mismos. Se trataron de identificar vulnerabilidades que permitieran, alguna de las siguientes acciones:"
+            self["introduction-paragraph-2"] = "Robo de identidad para defraudar o comprometer a la Organización o a sus usuarios,"
+            self["introduction-paragraph-3"] = "Obtención y accesos por medio de usuarios no autorizados con atributos para crear, acceder o borrar información,"
+            self["introduction-paragraph-4"] = "Posibilidad de lograr el acceso para la administración de los componentes que conforman la red de la Organización,"
+            self["introduction-paragraph-5"] = "Acceso a información disponible a usuarios no autorizados sobre la infraestructura tecnológica y su configuración."
             self["objetive"]= "Objetivo y alcance"
-            self["objetive-paragraph"] = """El objetivo del presente proyecto consistió en la identificación del grado de exposición a las amenazas y vulnerabilidades de seguridad de la infraestructura expuesta a internet de la organización.
-Para cumplir con el objetivo planteado llevamos a cabo un Intento de intrusión externo sobre las siguientes direcciones IP que fueron descubiertas por el equipo  y validadas por la compañía:
-            """
+            self["objetive-paragraph-1"] = "El objetivo del presente proyecto consistió en la identificación del grado de exposición a las amenazas y vulnerabilidades de seguridad de la infraestructura expuesta a internet de la organización."
+            self["objetive-paragraph-2"] = "Para cumplir con el objetivo planteado llevamos a cabo un Intento de intrusión externo sobre las siguientes direcciones IP que fueron descubiertas por el equipo  y validadas por la compañía:"
             self["percentage"] = "Porcentaje de vulnerabilidades detectadas"
             self["percentage-paragraph"] = "Se han detectado {} vulnerabilidades, de las cuales se han clasificado según su factor de riesgo {} de riesgo critico, {} de riesgo alto, {} de riesgo medio y {} de riesgo bajo"
             self["cant"] = "Cantidad"
@@ -43,36 +41,31 @@ Para cumplir con el objetivo planteado llevamos a cabo un Intento de intrusión 
             self["security-evaluation"] = "Evaluación de seguridad del perimitro externo"
             self["discovery"] = "Descubrimiento"
             self["discovery-paragraph-1"] = "El equipo de profesionales de BTR Consulting utilizó herramientas públicas y propias para analizar el perfil de la arquitectura de {} conectada a Internet, utilizando las siguientes direcciones IP descubiertas por el equipo y validadas por la compañía:"
-            self["discovery-paragraph-2"] = """Sobre todas las direcciones IP mencionadas se realizó una identificación de vulnerabilidades y debilidades. Las tareas realizadas fueron las siguientes:
-1) Análisis de información disponible en Internet, y de acceso público:
-    Búsquedas por palabras en los motores de busqueda más populares de Internet, tales como: Google, Bing y Yahoo.
-    Consultas a bases de datos públicas para localizar nombres de dominio.
-2) Identificación de debilidades en la configuración de los equipos expuestos a Internet:
-    Intento de recopilar información de las direcciones internas de los hosts, accediendo a la información de zona del servicio de Nombres de Dominio (DNS).
-    Rastreo de paquetes de comunicación, con el fin de determinar la topología de red incluyendo routers y firewalls.
-    Pinging de hosts con paquetes de comunicación con el objetivo de determinar cuáles de ellos se encuentran activos.
-De las tareas mencionadas surgió la siguiente información:
-"""
+            self["discovery-paragraph-2"] = "Sobre todas las direcciones IP mencionadas se realizó una identificación de vulnerabilidades y debilidades. Las tareas realizadas fueron las siguientes:"
+            self["discovery-paragraph-3"] = "1) Análisis de información disponible en Internet, y de acceso público:"
+            self["discovery-paragraph-4"] = "Búsquedas por palabras en los motores de busqueda más populares de Internet, tales como: Google, Bing y Yahoo."
+            self["discovery-paragraph-5"] = "Consultas a bases de datos públicas para localizar nombres de dominio."
+            self["discovery-paragraph-6"] = "2) Identificación de debilidades en la configuración de los equipos expuestos a Internet:"
+            self["discovery-paragraph-7"] = "Intento de recopilar información de las direcciones internas de los hosts, accediendo a la información de zona del servicio de Nombres de Dominio (DNS)."
+            self["discovery-paragraph-8"] = "Rastreo de paquetes de comunicación, con el fin de determinar la topología de red incluyendo routers y firewalls."
+            self["discovery-paragraph-9"] = "Pinging de hosts con paquetes de comunicación con el objetivo de determinar cuáles de ellos se encuentran activos."
+            self["discovery-paragraph-10"] = "De las tareas mencionadas surgió la siguiente información:"
             self["nslookup"] = "Nslookup"
-            self["nslookup-paragraph"] = """Nslookup es una herramienta pública utilizada para enumerar “información de zona” correspondiente a servidores de nombres de dominio. Todo equipo publicado en Internet posee una dirección de red específica (IP), así como cada casa posee una dirección de calle. Así también, cada host posee un nombre que se corresponde con esa dirección de red (IP). Los servidores de nombre de dominio son los responsables de mantener registro de las direcciones de red asociadas a un nombre de host. Se denomina “Transferencia de Zona” a la función que poseen los servidores de nombres de dominio, por la cual comparten información de zona entre ellos.
-Adicionalmente se utilizaron las herramientas Dig y Fierce las cuales poseen funcionalidades análogas a las de Nslookup permitiendo probar la transferencia de zona. A continuación se expone el resultado de dichos programas:
-"""
+            self["nslookup-paragraph-1"] = "Nslookup es una herramienta pública utilizada para enumerar “información de zona” correspondiente a servidores de nombres de dominio. Todo equipo publicado en Internet posee una dirección de red específica (IP), así como cada casa posee una dirección de calle. Así también, cada host posee un nombre que se corresponde con esa dirección de red (IP). Los servidores de nombre de dominio son los responsables de mantener registro de las direcciones de red asociadas a un nombre de host. Se denomina “Transferencia de Zona” a la función que poseen los servidores de nombres de dominio, por la cual comparten información de zona entre ellos."
+            self["nslookup-paragraph-2"] = "Adicionalmente se utilizaron las herramientas Dig y Fierce las cuales poseen funcionalidades análogas a las de Nslookup permitiendo probar la transferencia de zona. A continuación se expone el resultado de dichos programas:"
             self["whois"] = "Whois"
-            self["whois-paragraph"] = """“Whois”, es un programa utilizado para extraer información administrativa pública registrada en Internet. Cualquier persona puede extraer direcciones IP, números de teléfono y nombres de contactos desde la base de datos del registrador.
-La información publicada es requerida para ser dueño de un rango IP en Internet. Sin embargo, de esta manera un atacante comienza con el reconocimiento del equipo en un esfuerzo de enfocar el ataque.
-Los resultados típicos muestran información tal como rangos de direcciones de red, direcciones físicas, nombres de contacto y números de teléfono.
-"""
+            self["whois-paragraph-1"] = "“Whois”, es un programa utilizado para extraer información administrativa pública registrada en Internet. Cualquier persona puede extraer direcciones IP, números de teléfono y nombres de contactos desde la base de datos del registrador."
+            self["whois-paragraph-2"] = "La información publicada es requerida para ser dueño de un rango IP en Internet. Sin embargo, de esta manera un atacante comienza con el reconocimiento del equipo en un esfuerzo de enfocar el ataque."
+            self["whois-paragraph-3"] = "Los resultados típicos muestran información tal como rangos de direcciones de red, direcciones físicas, nombres de contacto y números de teléfono."
             self["traceroute"] = "Traceroute"
-            self["traceroute-paragraph"] = """Traceroute, se utiliza para asociar el camino de la red tomado a partir de una computadora principal a otra. El propósito es rastrear estos caminos de comunicaciones para así obtener información adicional acerca de la configuración de red de la Compañía. De esta manera, se pueden identificar Firewalls y Routers que pueden convertirse en blancos para la reunión de información. La información obtenida también se encuentra disponible para cualquier persona conectada a Internet, pero esto no implica, necesariamente, un alto riesgo.
-Trace utiliza paquetes ICMP los cuales en muchos casos se encuentran filtrados por lo que no siempre es posible obtener dicha información. Para evitar dicha situación se utilizan diferentes técnicas de modificación de paquetes para así evadir el filtrado que normalmente realizan firewalls y routers y obtener la información sobre los hosts como se ve a continuación:
-"""
+            self["traceroute-paragraph-1"] = "Traceroute, se utiliza para asociar el camino de la red tomado a partir de una computadora principal a otra. El propósito es rastrear estos caminos de comunicaciones para así obtener información adicional acerca de la configuración de red de la Compañía. De esta manera, se pueden identificar Firewalls y Routers que pueden convertirse en blancos para la reunión de información. La información obtenida también se encuentra disponible para cualquier persona conectada a Internet, pero esto no implica, necesariamente, un alto riesgo."
+            self["traceroute-paragraph-2"] = "Trace utiliza paquetes ICMP los cuales en muchos casos se encuentran filtrados por lo que no siempre es posible obtener dicha información. Para evitar dicha situación se utilizan diferentes técnicas de modificación de paquetes para así evadir el filtrado que normalmente realizan firewalls y routers y obtener la información sobre los hosts como se ve a continuación:"
             self["port-scan"] = "Resultados del escaneo de puertos"
-            self["port-scan-paragraph"] = """Se realizó un escaneo a las direcciones identificadas durante la etapa de descubrimiento con herramientas propias y con otras de uso público, con el propósito de determinar los sistemas operativos y servicios habilitados en la red de la Compañía. Luego se realizó un “Banner acquisition” para determinar los sistemas y versiones del software que se ejecutan en los hosts.
-La identificación del sistema operativo es realizada por medio de técnicas de TCP/IP “OS fingerprinting”. Abusando de las diferentes formas en que las empresas de software implementan el “stack” de TCP/IP, las herramientas de escaneo realizan una comparación de estos stacks contra una base de datos, determinando así el tipo y versión de los sistemas operativos.
-La técnica de “Banner acquisition” permite recopilar información adicional, con el fin de identificar de una manera más certera el sistema operativo que se ejecuta en cada host. Una vez recopilada dicha información, es posible relacionarla con una vulnerabilidad propia de cada sistema operativo.
-Dado que los puertos de comunicación representan una potencial vía de acceso, los profesionales de BTR Consulting realizaron un escaneo de puertos utilizando técnicas de evasión de sistemas de detección de intrusos (IDS) para identificar aquellos que se encuentran abiertos, con el fin de hallar potenciales vulnerabilidades asociadas a los mismos.
-La siguiente tabla muestra los resultados del escaneo de puertos y adquisición de banners realizado:
-"""
+            self["port-scan-paragraph-1"] = "Se realizó un escaneo a las direcciones identificadas durante la etapa de descubrimiento con herramientas propias y con otras de uso público, con el propósito de determinar los sistemas operativos y servicios habilitados en la red de la Compañía. Luego se realizó un “Banner acquisition” para determinar los sistemas y versiones del software que se ejecutan en los hosts."
+            self["port-scan-paragraph-2"] = "La identificación del sistema operativo es realizada por medio de técnicas de TCP/IP “OS fingerprinting”. Abusando de las diferentes formas en que las empresas de software implementan el “stack” de TCP/IP, las herramientas de escaneo realizan una comparación de estos stacks contra una base de datos, determinando así el tipo y versión de los sistemas operativos."
+            self["port-scan-paragraph-3"] = "La técnica de “Banner acquisition” permite recopilar información adicional, con el fin de identificar de una manera más certera el sistema operativo que se ejecuta en cada host. Una vez recopilada dicha información, es posible relacionarla con una vulnerabilidad propia de cada sistema operativo."
+            self["port-scan-paragraph-4"] = "Dado que los puertos de comunicación representan una potencial vía de acceso, los profesionales de BTR Consulting realizaron un escaneo de puertos utilizando técnicas de evasión de sistemas de detección de intrusos (IDS) para identificar aquellos que se encuentran abiertos, con el fin de hallar potenciales vulnerabilidades asociadas a los mismos."
+            self["port-scan-paragraph-5"] = "La siguiente tabla muestra los resultados del escaneo de puertos y adquisición de banners realizado:"
             self["vulnerabilities-identification"] = "Identificación de vulnerabilidades"
             self["vulnerabilities-identification-paragraph"] = "Utilizando la información adquirida durante el escaneo de puertos y la obtención de banners, los profesionales de BTR Consulting realizaron una búsqueda de vulnerabilidades utilizando herramientas propias, otras disponibles en Internet y técnicas manuales a fin de poder detectar las debilidades existentes en los puertos abiertos."
             self["explotation"] = "Explotación"
@@ -100,16 +93,14 @@ La siguiente tabla muestra los resultados del escaneo de puertos y adquisición 
             self["content"] = "Content"
             self["executive-summary"] = "Executive summary"
             self["introduction"] = "Introduction"
-            self["introduction-paragraph"] = """ has asked BTR Consulting to perform a security assessment of its infrastructure exposed to the Internet. The purpose of this assessment was to assist the company in evaluating the overall risk of unauthorized access to IT assets and the information contained or managed by them. An attempt was made to identify vulnerabilities that would allow any of the following actions:
-            Identity theft to defraud or compromise the Organization or its users,
-            Obtaining and access by means of unauthorized users with attributes to create, access or delete information,
-            Possibility of gaining access for the administration of the components that make up the Organization's network,
-            Access to information available to unauthorized users about the technological infrastructure and its configuration.
-            """
+            self["introduction-paragraph-1"] = "has asked BTR Consulting to perform a security assessment of its infrastructure exposed to the Internet. The purpose of this assessment was to assist the company in evaluating the overall risk of unauthorized access to IT assets and the information contained or managed by them. An attempt was made to identify vulnerabilities that would allow any of the following actions:"
+            self["introduction-paragraph-2"] = "Identity theft to defraud or compromise the Organization or its users,"
+            self["introduction-paragraph-3"] = "Obtaining and access by means of unauthorized users with attributes to create, access or delete information,"
+            self["introduction-paragraph-4"] = "Possibility of gaining access for the administration of the components that make up the Organization's network,"
+            self["introduction-paragraph-5"] = "Access to information available to unauthorized users about the technological infrastructure and its configuration."
             self["objetive"]= "Objetive and scope"
-            self["objetive-paragraph"] = """The objective of this project was to identify the degree of exposure to threats and security vulnerabilities of the infrastructure exposed to the Internet of the organization.
-In order to meet the objective we carried out an external intrusion attempt on the following ranges of IP addresses provided by the company:
-            """
+            self["objetive-paragraph-1"] = "The objective of this project was to identify the degree of exposure to threats and security vulnerabilities of the infrastructure exposed to the Internet of the organization."
+            self["objetive-paragraph-2"] = "In order to meet the objective we carried out an external intrusion attempt on the following ranges of IP addresses provided by the company:"
             self["percentage"] = "Detected vulnerabilities percentage"
             self["percentage-paragraph"] = "There have been detected {} vulnerabilities, of which {} have been catalogued as critical, {} as high, {} as medium, {} as low."
             self["cant"] = "Quantity"
@@ -123,38 +114,33 @@ In order to meet the objective we carried out an external intrusion attempt on t
             self["security-evaluation"] = "Security evaluation of the extern perimiter"
             self["discovery"] = "Discovery"
             self["discovery-paragraph-1"] = "BTR Consulting's team of professionals used publicly available and proprietary tools to analyze the architecture profile of the {} Internet connection, using the following IP addresses provided by the company:"
-            self["discovery-paragraph-2"] = """Vulnerabilities and weaknesses were identified on all the IP addresses mentioned. The tasks performed were as follows:
-1) Analysis of information available on the Internet, and of public access:
-    Searches by words in the most popular Internet portals, such as: Google, Bing and Yahoo.
-    Queries to NIC Argentina, a public database, to locate domain names.
-2) Identification of weaknesses in the configuration of equipment exposed to the Internet:
-    Attempt to collect information from the internal addresses of hosts, accessing the zone information of the Domain Names service (DNS).
-    Tracking of communication packets, in order to determine the network topology including routers and firewalls.
-    Pinging of hosts with communication packets in order to determine which of them are active.
-From the tasks mentioned the following information emerged:
-"""
+            self["discovery-paragraph-2"] = "Vulnerabilities and weaknesses were identified on all the IP addresses mentioned. The tasks performed were as follows:"
+            self["discovery-paragraph-3"] = "1) Analysis of information available on the Internet, and of public access:"
+            self["discovery-paragraph-4"] = "Searches by words in the most popular Internet portals, such as: Google, Bing and Yahoo."
+            self["discovery-paragraph-5"] = "Queries to NIC Argentina, a public database, to locate domain names."
+            self["discovery-paragraph-6"] = "2) Identification of weaknesses in the configuration of equipment exposed to the Internet:"
+            self["discovery-paragraph-7"] = "Attempt to collect information from the internal addresses of hosts, accessing the zone information of the Domain Names service (DNS)."
+            self["discovery-paragraph-8"] = "Tracking of communication packets, in order to determine the network topology including routers and firewalls."
+            self["discovery-paragraph-9"] = "Pinging of hosts with communication packets in order to determine which of them are active."
+            self["discovery-paragraph-10"] = "From the tasks mentioned the following information emerged:"
             self["nslookup"] = "Nslookup"
-            self["nslookup-paragraph"] = """Nslookup is a public tool used to enumerate "zone information" corresponding to domain name servers. Every computer published on the Internet has a specific network address (IP), just as every house has a street address. Also, each host has a name that corresponds to that network address (IP). Domain name servers are responsible for keeping track of the network addresses associated with a host name. Zone Transfer" is the function that domain name servers have, by which they share zone information among themselves.
-Additionally, the Dig and Fierce tools were used, which have functionalities analogous to those of Nslookup, allowing the zone transfer to be tested. The result of these programs is shown below:
-"""
+            self["nslookup-paragraph-1"] = "Nslookup is a public tool used to enumerate zone information corresponding to domain name servers. Every computer published on the Internet has a specific network address (IP), just as every house has a street address. Also, each host has a name that corresponds to that network address (IP). Domain name servers are responsible for keeping track of the network addresses associated with a host name. Zone Transfer is the function that domain name servers have, by which they share zone information among themselves."
+            self["nslookup-paragraph-2"] = "Additionally, the Dig and Fierce tools were used, which have functionalities analogous to those of Nslookup, allowing the zone transfer to be tested. The result of these programs is shown below:"
             self["whois"] = "Whois"
-            self["whois-paragraph"] = """"Whois" is a program used to extract public administrative information registered on the Internet. Anyone can extract IP addresses, phone numbers and contact names from the registrar's database.
-Published information is required to own an IP range on the Internet. However, in this way an attacker begins with the recognition of the team in an effort to focus the attack.
-Typical results show information such as network address ranges, physical addresses, contact names and phone numbers.
-"""
+            self["whois-paragraph-1"] = "Whois is a program used to extract public administrative information registered on the Internet. Anyone can extract IP addresses, phone numbers and contact names from the registrar's database."
+            self["whois-paragraph-2"] = "Published information is required to own an IP range on the Internet. However, in this way an attacker begins with the recognition of the team in an effort to focus the attack."
+            self["whois-paragraph-3"] = "Typical results show information such as network address ranges, physical addresses, contact names and phone numbers."
             self["traceroute"] = "Traceroute"
-            self["traceroute-paragraph"] = """Traceroute, is used to associate the network path taken from one main computer to another. The purpose is to track these communication paths in order to obtain additional information about the Company's network configuration. In this way, Firewalls and Routers can be identified and become targets for information gathering. The information obtained is also available to anyone connected to the Internet, but this does not necessarily imply a high risk.
-Trace uses ICMP packets which in many cases are filtered so it is not always possible to obtain such information. In order to avoid this situation, different packet modification techniques are used in order to avoid the filtering normally carried out by firewalls and routers and to obtain information about the hosts as shown below:
-"""
+            self["traceroute-paragraph-1"] = "Traceroute, is used to associate the network path taken from one main computer to another. The purpose is to track these communication paths in order to obtain additional information about the Company's network configuration. In this way, Firewalls and Routers can be identified and become targets for information gathering. The information obtained is also available to anyone connected to the Internet, but this does not necessarily imply a high risk."    
+            self["traceroute-paragraph-2"] = "Trace uses ICMP packets which in many cases are filtered so it is not always possible to obtain such information. In order to avoid this situation, different packet modification techniques are used in order to avoid the filtering normally carried out by firewalls and routers and to obtain information about the hosts as shown below:"
             self["port-scan"] = "Port scanning results"
             self["port-scan-paragraph"] = "The following table shows the results of the port scanning and banner acquisition performed"
             self["vulnerabilities-identification"] = "Vulnerabilities identification"
-            self["vulnerabilities-identification-paragraph"] = """The addresses identified during Phase 1 were scanned with our own tools and others for public use, in order to determine the operating systems and services enabled in the Company's network. A Banner acquisition was then performed to determine the systems and software versions running on the hosts.
-The identification of the operating system is done through TCP/IP "OS fingerprinting" techniques. By abusing the different ways in which software companies implement the TCP/IP stack, the scanning tools perform a comparison of these stacks against a database, thus determining the type and version of the operating systems.
-The Banner acquisition technique allows additional information to be collected in order to more accurately identify the operating system running on each host. Once this information has been collected, it is possible to relate it to a vulnerability specific to each operating system.
-Given that communication ports represent a potential access route, BTR Consulting professionals performed a port scan using intrusion detection system (IDS) evasion techniques to identify those that are open, in order to find potential vulnerabilities associated with them.
-Using the information acquired during the port scanning and the acquisition of banners, the professionals of BTR Consulting carried out a search for vulnerabilities using their own tools, others available on the Internet and manual techniques in order to be able to detect the existing weaknesses in the open ports.
-"""
+            self["vulnerabilities-identification-paragraph-1"] = "The addresses identified during Phase 1 were scanned with our own tools and others for public use, in order to determine the operating systems and services enabled in the Company's network. A Banner acquisition was then performed to determine the systems and software versions running on the hosts."
+            self["vulnerabilities-identification-paragraph-2"] = "The identification of the operating system is done through TCP/IP OS fingerprinting techniques. By abusing the different ways in which software companies implement the TCP/IP stack, the scanning tools perform a comparison of these stacks against a database, thus determining the type and version of the operating systems."
+            self["vulnerabilities-identification-paragraph-3"] = "The Banner acquisition technique allows additional information to be collected in order to more accurately identify the operating system running on each host. Once this information has been collected, it is possible to relate it to a vulnerability specific to each operating system."
+            self["vulnerabilities-identification-paragraph-4"] = "Given that communication ports represent a potential access route, BTR Consulting professionals performed a port scan using intrusion detection system (IDS) evasion techniques to identify those that are open, in order to find potential vulnerabilities associated with them."
+            self["vulnerabilities-identification-paragraph-5"] = "Using the information acquired during the port scanning and the acquisition of banners, the professionals of BTR Consulting carried out a search for vulnerabilities using their own tools, others available on the Internet and manual techniques in order to be able to detect the existing weaknesses in the open ports."
             self["explotation"] = "Explotation"
             self["explotation-paragraph"] = "BTR Consulting's professionals used the information gathered in the vulnerability identification phase to apply intrusive techniques in order to obtain unauthorized access to the Company's hosts. Although no vulnerabilities were detected that would allow access to the devices of the redexposed {}, some vulnerabilities and weaknesses of configuration were detected, which although they did not conclude in the commitment of the integrity of the external network, require modifications with the objective of reinforcing the security of the IT environment."
             self["recomendation"] = "Vulnerabilities and associated recommendations"
