@@ -15,10 +15,11 @@ class PortInfo:
     def __lt__(self,other):
         return (int(self.port) < int(other.port))
 
-
-
     def __str__(self):
         return "{}/{} {}".format(self.port, self.protocol, self.service)
 
     def strIp(self, ip):
-        return "{} ({}/{})".format(ip, self.port, self.protocol)
+        if (self.port != "0"):
+            return "{} ({}/{})".format(ip, self.port, self.protocol)
+        else:
+            return ip

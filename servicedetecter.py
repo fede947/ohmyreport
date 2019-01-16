@@ -24,13 +24,13 @@ class ServiceDetecter:
         table = document.add_table(rows=1, cols=2)
         table.style = TablaIPPuerto
         table.autofit = False
-        for cell in table.columns[0].cells:
-            cell.width = docx.shared.Cm(3)
-        for cell in table.columns[1].cells:
-            cell.width = docx.shared.Cm(12)
         table.rows[HEADER].cells[IP].text = "IP"
         table.rows[HEADER].cells[PUERTO].text = "PUERTO Y SERVICIO"
         ipList = list(self.ipsDict.values())
         ipList.sort()
         for ip in ipList:
             ip.write(table, IP, PUERTO)
+        for cell in table.columns[0].cells:
+            cell.width = docx.shared.Cm(3)
+        for cell in table.columns[1].cells:
+            cell.width = docx.shared.Cm(12)
