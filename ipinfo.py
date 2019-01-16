@@ -41,7 +41,7 @@ class IpInfo:
         row_cells = table.add_row().cells
         row_cells[ip_idx].text = self.ip
         ports = self.puertos.values()
-        row_cells[port_idx].text = (os.linesep).join(map(str,ports))
+        row_cells[port_idx].text = (os.linesep).join(map(str,sorted(ports)))
 
     def __str__(self):
         return (os.linesep).join([port.strIp(self.ip) for port in self.puertos.values()])
