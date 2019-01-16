@@ -177,7 +177,11 @@ class Report:
         document.add_paragraph(language["traceroute-paragraph-1"])
         document.add_paragraph(language["traceroute-paragraph-2"])
         document.add_heading(language["port-scan"], level=3)
-        document.add_paragraph(language["port-scan-paragraph"])
+        document.add_paragraph(language["port-scan-paragraph-1"])
+        document.add_paragraph(language["port-scan-paragraph-2"])
+        document.add_paragraph(language["port-scan-paragraph-3"])
+        document.add_paragraph(language["port-scan-paragraph-4"])
+        document.add_paragraph(language["port-scan-paragraph-5"])
 
         Report.scanTable(document, vulnerabilities, nmap) #FIXIT evitar pasar los datos de nmap al reporte
         document.add_page_break()                         #      y que complete las vulnerabilidades desde el archivo ohmyreport
@@ -205,11 +209,7 @@ class Report:
 
     def vulnerabilities(document, vulnerabilities, language, client):
         document.add_heading(language["vulnerabilities-identification"])
-        document.add_paragraph(language["vulnerabilities-identification-paragraph-1"])
-        document.add_paragraph(language["vulnerabilities-identification-paragraph-2"])
-        document.add_paragraph(language["vulnerabilities-identification-paragraph-3"])
-        document.add_paragraph(language["vulnerabilities-identification-paragraph-4"])
-        document.add_paragraph(language["vulnerabilities-identification-paragraph-5"])
+        document.add_paragraph(language["vulnerabilities-identification-paragraph"])
         document.add_heading(language["explotation"])
         document.add_paragraph(language["explotation-paragraph"].format(client))
         document.add_heading(language["recomendation"])
@@ -229,6 +229,11 @@ class Report:
             #Armando la tabla de detalles
             table = document.add_table(rows=10, cols=2)
             table.style = TablaVulnerabilidades
+            table.autofit = False
+            for cell in table.columns[0].cells:
+                cell.width = Cm(3.5)
+            for cell in table.columns[1].cells:
+                cell.width = Cm(11)
             #Mergeo la primera fila de la tabla y le asigno el nombre de la vulnerabilidad
             table.rows[0].cells[0].merge(table.rows[0].cells[1]).text = vuln.name
             table.rows[1].cells[0].text = language["risk-title-table"]

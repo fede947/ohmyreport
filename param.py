@@ -16,8 +16,8 @@ def arguments():
     args = parser.parse_args()
 
     if not args.output:
-        args.output = args.file
-
+        args.output = args.file[:-4]
+        print(args.output)
     if not args.excel and not args.word:
         args.excel = True
         args.word = True
