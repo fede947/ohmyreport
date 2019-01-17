@@ -75,6 +75,13 @@ class Vulnerabilidad:
             ip.add(row["Port"], row["Protocol"], "")
             self.ips[row["Host"]] = ip
 
+    def getIps(self):
+        #[item for sublist in l for item in sublist]
+        ipPorts = []
+        for ip in self.ips.values():
+            ipPorts = ipPorts + ip.getIpPorts()
+        return ipPorts
+
     def traducir(self, lang):
         self.solution = translate(self.solution, lang)
         self.descrip = translate(self.descrip, lang)

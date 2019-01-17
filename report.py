@@ -3,14 +3,18 @@ from docx import Document
 from language import *
 import os
 import xmlservicedetecter
-import servicedetecter
+import docx
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm
 
 linesep = "\n"
+HEADER = 0
+IP = 0
+PUERTO = 1
 TablaVulnerabilidades = 'Tabla Vulnerabilidades'
 tablaResumenVulnerabilidades = 'Tabla Vulnerabilidades 2'
+TablaIPPuerto = 'Tabla IP/Puerto'
 
 class Report:
 
@@ -94,6 +98,18 @@ class Report:
     def content(document, language):
         document.add_heading(language["content"])
         document.add_page_break()
+    
+    def writeIps(document, ips):
+        #This way make the table but it is unaligned
+        #ipsTable = document.add_table(rows=1, cols=2)
+        #ipsLen = len(ips)
+        #for i in range(0, ipsLen):
+         #   if (i < ipsLen / 2):
+         #       ipsTable.rows[0].cells[0].add_paragraph(ips[i], style = 'Bullet - BTR')
+         #   else:
+         #       ipsTable.rows[0].cells[1].add_paragraph(ips[i], style = 'Bullet - BTR')'''
+        for ip in ips:
+            document.add_paragraph(ip, style = 'Bullet - BTR')
 
     def executiveSummary(document, vulnerabilities, language, client):
         document.add_heading(language["executive-summary"])
@@ -106,8 +122,7 @@ class Report:
         document.add_heading(language["objetive"], level=3)
         document.add_paragraph(language["objetive-paragraph-1"])
         document.add_paragraph(language["objetive-paragraph-2"])
-        for ip in vulnerabilities.ips():
-            document.add_paragraph(ip, style = 'Bullet - BTR')
+        Report.writeIps(document, vulnerabilities.ips())
 
         document.add_heading(language["percentage"], level=3)
         document.add_paragraph(language["percentage-paragraph"].format(len(vulnerabilities), vulnerabilities.count('Critical'), vulnerabilities.count('High'), vulnerabilities.count('Medium'), vulnerabilities.count('Low')))
@@ -155,8 +170,7 @@ class Report:
         document.add_heading(language["security-evaluation"])
         document.add_heading(language["discovery"], level=3)
         document.add_paragraph(language["discovery-paragraph-1"].format(client))
-        for ip in vulnerabilities.ips():
-            document.add_paragraph(ip, style = 'Bullet - BTR')
+        Report.writeIps(document, vulnerabilities.ips())
         document.add_paragraph(language["discovery-paragraph-2"])
         document.add_paragraph(language["discovery-paragraph-3"])
         document.add_paragraph(language["discovery-paragraph-4"], style = 'Bullet - BTR')
@@ -187,18 +201,28 @@ class Report:
         document.add_page_break()                         #      y que complete las vulnerabilidades desde el archivo ohmyreport
 
     def scanTable(document, vulnerabilities, nmap):
+        #Armando la tabla de detalles
+        table = document.add_table(rows=1, cols=2)
+        table.style = TablaIPPuerto
+        table.autofit = False
+        table.rows[HEADER].cells[IP].text = "IP"
+        table.rows[HEADER].cells[PUERTO].text = "PUERTO Y SERVICIO"
+        ipList = []
         if (nmap):
-            serviceDetecter = servicedetecter.ServiceDetecter()
-            xmlServiceDetecter = xmlservicedetecter.XmlServiceDetecter(serviceDetecter, nmap)
-            serviceDetecter.write(document)
+            xmlServiceDetecter = xmlservicedetecter.XmlServiceDetecter(nmap)
+            ipList = xmlServiceDetecter.getIps()
+            ipList.sort()
         else:
-            ipsInfo = vulnerabilities.getIps()
-            table = document.add_table(rows=1, cols=2)
-            #table.style = TablaIPPuerto
-            table.rows[0].cells[0].text = "IP"
-            table.rows[0].cells[1].text = "PUERTO Y SERVICIO"
-            for ip in ipsInfo:
-                ip.write(table,0,1)
+            ipList = vulnerabilities.getIps()
+        for ip in ipList:
+            row_cells = table.add_row().cells
+            row_cells[IP].text = ip.getIp()
+            ports = ip.getPorts()
+            Report.cellWriteList(row_cells[PUERTO], ports)
+        for cell in table.columns[0].cells:
+            cell.width = docx.shared.Cm(3)
+        for cell in table.columns[1].cells:
+            cell.width = docx.shared.Cm(12)
 
     def cellWriteList(cell, listC):
         # To evit the first line empty
@@ -206,6 +230,12 @@ class Report:
         listC.pop(0)
         for elem in listC:
             cell.add_paragraph(str(elem))
+
+    def toWordFormat(text):
+        text = text.split('.\n\n')
+        text = ["{}{}".format(paragraph.replace('\n', ' '), '.') for paragraph in text]
+        text[-1] = text[-1].replace('..','.')
+        return text
 
     def vulnerabilities(document, vulnerabilities, language, client):
         document.add_heading(language["vulnerabilities-identification"])
@@ -218,7 +248,8 @@ class Report:
         for vuln in vulnerabilities:
             document.add_heading(vuln.name)
             document.add_heading(language["identification-title"],level=3)
-            document.add_paragraph(vuln.synopsis)
+            for elem in Report.toWordFormat(vuln.synopsis):
+                document.add_paragraph(str(elem))
             document.add_heading(language["vulnerability-title"],level=3)
 
             document.add_paragraph("Detection here")
@@ -241,12 +272,12 @@ class Report:
             table.rows[2].cells[0].text = language["category-title-table"]
             table.rows[2].cells[1].text = ""
             table.rows[3].cells[0].text = language["description-title-table"]
-            table.rows[3].cells[1].text = vuln.descrip
+            Report.cellWriteList(table.rows[3].cells[1], Report.toWordFormat(vuln.descrip))
+
             table.rows[4].cells[0].text = language["ips"]
-            ips = list(vuln.ips.values())
-            Report.cellWriteList(table.rows[4].cells[1], ips)
+            Report.cellWriteList(table.rows[4].cells[1], vuln.getIps())
             table.rows[5].cells[0].text = language["solution-title-table"]
-            table.rows[5].cells[1].text = vuln.solution
+            Report.cellWriteList(table.rows[5].cells[1], Report.toWordFormat(vuln.solution))
             table.rows[6].cells[0].text = language["impact-title-table"]
             table.rows[6].cells[1].text = ""
             table.rows[7].cells[0].text = language["CVSS-title-table"]

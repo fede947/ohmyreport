@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import servicedetecter
+from servicedetecter import ServiceDetecter
 import xml.etree.ElementTree as ET
-class XmlServiceDetecter:
+
+class XmlServiceDetecter(ServiceDetecter):
     
-    def __init__(self, serviceDetecter, path):
-        self.serviceDetecter = serviceDetecter
+    def __init__(self, path):
+        super().__init__()
         self.root = ET.parse(path).getroot()
         self.parse()
     
@@ -29,7 +30,7 @@ class XmlServiceDetecter:
                             service_product = ""
                             service_version = ""
                             service_extrainfo = ""
-                        self.serviceDetecter.add(address.attrib["addr"], port.attrib["portid"], 
+                        self.add(address.attrib["addr"], port.attrib["portid"], 
                                     port.attrib["protocol"], 
                                     "{} {} {} {}".format(service_nombre, 
                                     service_product, service_version, service_extrainfo))
