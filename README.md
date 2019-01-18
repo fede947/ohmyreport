@@ -1,3 +1,6 @@
+## Como instalarlo
+  Dentro de la carpeta ohmyreport descargada ejecutar `makefile install`
+
 ## Como exportar archivos de Nessus
   Exportar el reporte de Nessus en CSV, desde la opción "Export" de la esquina superior derecha y luego csv.
 
@@ -26,7 +29,7 @@ NESSUSFILE.csv: archivo csv exportado de Nessus
 
 ## Ejemplos  
 
-`ohmyreport NESSUSFILE.csv` reporte word y excel en ingles
+`ohmyreport NESSUSFILE.csv` reporte word y excel en ingles  
 `ohmyreport NESSUSFILE.csv  -o FILENAME --language en` reporte word y excel en ingles  
 `ohmyreport NESSUSFILE.csv  -o FILENAME -w --language en` reporte word ingles  
 `ohmyreport NESSUSFILE.csv  -o FILENAME -e --language es`reporte excel en español  
