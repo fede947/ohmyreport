@@ -1,6 +1,7 @@
 import dictpersist
 import os
 
+ID = "Plugin id"
 NAME = "Nombre"
 SYNOP = "Sinopsis"
 CAT = "Categoría"
@@ -29,9 +30,9 @@ def mainMenu():
         if (entry == 1):
             printTranslations(db)
         if (entry == 2):
-            addTranslation(db)
+            addTranslationMenu(db)
 
-def addTranslation(db):
+def addTranslationMenu(db):
     id = input("Ingrese id de la vulnerabilidad: ")
     name = input("Ingrese nombre de la vulnerabilidad: ")
     synop = input("Ingrese sinopsis de la vulnerabilidad: ")
@@ -40,9 +41,13 @@ def addTranslation(db):
     recom = input("Ingrese recomendación para la vulnerabilidad:")
     impact = input("Ingrese impacto de negocio de la vulnerabilidad:")
     effort = input("Ingrese esfuerzo para reparar la vulnerabilidad:")
+    addTranslation(db, {ID: id, NAME: name, SYNOP: synop, CAT: cat, DESCRIP: descrip, RECOM: recom, IMPACT: impact, EFFORT: effort})
+    
+def addTranslation(db, info):
+    id = info.pop(ID)
     actual = db.get(id, None)
     if (actual == None):
-        db[id] = {NAME: name, SYNOP: synop, CAT: cat, DESCRIP: descrip, RECOM: recom, IMPACT: impact, EFFORT: effort}
+        db[id] = info
         print("Vulnerabilidad agregada correctamente")
     else:
         print("La vulnerabilidad de id: {} ya existe".format(id))
@@ -57,8 +62,9 @@ def addTranslation(db):
             if (entry == 3):
                 break
             if (entry == 1):
-                db[id] = {NAME: name, SYNOP: synop, CAT: cat, DESCRIP: descrip, RECOM: recom, IMPACT: impact, EFFORT: effort}
+                db[id] = info
                 print("Vulnerabilidad agregada correctamente")
+                break
             if (entry == 2):
                 printVuln(id, db)
                 continue
