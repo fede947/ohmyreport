@@ -15,7 +15,7 @@ def main():
 
     csvParser = nessusparser.CsvParser(args.file)
 
-    vulnerabilidades = ListaVulnerabilidades()
+    vulnerabilidades = ListaVulnerabilidades(args.language)
 
     print('[+] Loading report...')
     vulnerabilidadesParseadas = csvParser.getAllVuln()
@@ -27,7 +27,7 @@ def main():
     progressBar.mostrar()
 
     for vulnerabilidad in vulnerabilidadesParseadas:
-        vulnerabilidades.agregar(vulnerabilidad, excluir=['None','Info'], language=args.language)
+        vulnerabilidades.agregar(vulnerabilidad, excluir=['None','Info'])
         progressBar.siguiente()
 
     vulnerabilidades.sort(reverse=True)

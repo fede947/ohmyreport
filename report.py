@@ -270,7 +270,7 @@ class Report:
             table.rows[1].cells[0].text = language["risk-title-table"]
             table.rows[1].cells[1].text = language[vuln.risk]
             table.rows[2].cells[0].text = language["category-title-table"]
-            table.rows[2].cells[1].text = ""
+            table.rows[2].cells[1].text = vuln.category
             table.rows[3].cells[0].text = language["description-title-table"]
             Report.cellWriteList(table.rows[3].cells[1], Report.toWordFormat(vuln.descrip))
 
@@ -279,13 +279,13 @@ class Report:
             table.rows[5].cells[0].text = language["solution-title-table"]
             Report.cellWriteList(table.rows[5].cells[1], Report.toWordFormat(vuln.solution))
             table.rows[6].cells[0].text = language["impact-title-table"]
-            table.rows[6].cells[1].text = ""
+            table.rows[6].cells[1].text = vuln.impact
             table.rows[7].cells[0].text = language["CVSS-title-table"]
             table.rows[7].cells[1].text = vuln.cvss
             table.rows[8].cells[0].text = language["CVE-title-table"]
             table.rows[8].cells[1].text = vuln.cve
             table.rows[9].cells[0].text = language["effort-title-table"]
-            table.rows[9].cells[1].text = ""
+            table.rows[9].cells[1].text = vuln.effort
 
 
             document.add_page_break()

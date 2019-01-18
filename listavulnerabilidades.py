@@ -1,15 +1,18 @@
+import translator
+
 class ListaVulnerabilidades(list):
 
-    def __init__(self):
+    def __init__(self, language):
         self.TotalIps = []
+        self.translator = translator.Translator(language)
 
-    def agregar(self, vuln, excluir, language):
+    def agregar(self, vuln, excluir):
         for ip in vuln.ips.values():
             if not ip in self.TotalIps:
                 self.TotalIps.append(ip)
 
         if vuln.risk not in excluir:
-            vuln.traducir(language)
+            self.translator.translate(vuln)
             self.append(vuln)
 
     def mostrar(self):

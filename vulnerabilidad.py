@@ -1,5 +1,4 @@
 import xlsxwriter
-from translate import translate
 import os
 import ipinfo
 
@@ -12,6 +11,7 @@ LOW = "Low"
 class Vulnerabilidad:
 
     def __init__(self):
+        self.id = NA
         self.cve = NA
         self.cvss = NA
         self.risk = NA
@@ -20,6 +20,9 @@ class Vulnerabilidad:
         self.synopsis = NA
         self.descrip = NA
         self.solution = NA
+        self.category = NA
+        self.impact = NA
+        self.effort = NA
 
     def mostrar(self):
         print("name: " + self.name)
@@ -59,7 +62,8 @@ class Vulnerabilidad:
         self.name = name
 
     def set(self, row):
-        if (self.name == NA):
+        if (self.id == NA):
+            self.id = row["Plugin ID"]
             self.cve = row["CVE"]
             self.cvss = row["CVSS"]
             self.risk = row["Risk"]
@@ -81,12 +85,6 @@ class Vulnerabilidad:
         for ip in self.ips.values():
             ipPorts = ipPorts + ip.getIpPorts()
         return ipPorts
-
-    def traducir(self, lang):
-        self.solution = translate(self.solution, lang)
-        self.descrip = translate(self.descrip, lang)
-        self.synopsis = translate(self.synopsis, lang)
-        self.name = translate(self.name, lang)
 
     def __lt__(self, other):
         if (self.risk == other.risk):
