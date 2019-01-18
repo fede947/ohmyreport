@@ -254,7 +254,7 @@ class Report:
 
             document.add_paragraph("Detection here")
             document.add_heading(language["exploitation-title"],level=3)
-            document.add_paragraph(language["exploit-subtitle"])
+            document.add_paragraph(vuln.explotation)
             document.add_heading(language["detailed-title"],level=3)
 
             #Armando la tabla de detalles

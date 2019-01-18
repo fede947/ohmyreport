@@ -23,6 +23,7 @@ class Vulnerabilidad:
         self.category = NA
         self.impact = NA
         self.effort = NA
+        self.explotation = NA
 
     def mostrar(self):
         print("name: " + self.name)

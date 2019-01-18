@@ -9,6 +9,7 @@ DESCRIP = "Descripción"
 RECOM = "Recomendación"
 IMPACT = "Impacto"
 EFFORT = "Esfuerzo"
+EXPLOTATION = "Explotación"
 DB = "db.json"
 
 def mainMenu():
@@ -36,12 +37,13 @@ def addTranslationMenu(db):
     id = input("Ingrese id de la vulnerabilidad: ")
     name = input("Ingrese nombre de la vulnerabilidad: ")
     synop = input("Ingrese sinopsis de la vulnerabilidad: ")
+    explo = input("Ingrese razón de la no explotación de la vulnerabilidad: ")
     cat = input("Ingrese categoría de la vulnerabilidad:")
     descrip = input("Ingrese descripción para la vulnerabilidad: ")
     recom = input("Ingrese recomendación para la vulnerabilidad:")
     impact = input("Ingrese impacto de negocio de la vulnerabilidad:")
     effort = input("Ingrese esfuerzo para reparar la vulnerabilidad:")
-    addTranslation(db, {ID: id, NAME: name, SYNOP: synop, CAT: cat, DESCRIP: descrip, RECOM: recom, IMPACT: impact, EFFORT: effort})
+    addTranslation(db, {ID: id, NAME: name, SYNOP: synop, EXPLOTATION: explo, CAT: cat, DESCRIP: descrip, RECOM: recom, IMPACT: impact, EFFORT: effort})
     
 def addTranslation(db, info):
     id = info.pop(ID)
@@ -129,6 +131,9 @@ def modifyVuln(id, db):
     synop = input("Ingrese nueva sinopsis de la vulnerabilidad ('-' para saltear): ")
     if (synop != '-'):
         newDict[SYNOP] = synop
+    explo = input("Ingrese nueva razón de la no explotación de la vulnerabilidad ('-' para saltear): ")
+    if (explo != '-'):
+        newDict[EXPLOTATION] = explo
     cat = input("Ingrese nueva categoría de la vulnerabilidad ('-' para saltear): ")
     if (cat != '-'):
         newDict[CAT] = cat

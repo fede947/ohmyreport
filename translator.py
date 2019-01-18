@@ -25,3 +25,4 @@ class Translator():
             vuln.solution = translation[RECOM]
             vuln.impact = translation[IMPACT]
             vuln.effort = translation[EFFORT]
+            vuln.explotation = translation[EXPLOTATION]
