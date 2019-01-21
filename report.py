@@ -82,7 +82,7 @@ class Report:
         workbook.close()
 
     def toWord(vulnerabilidades, fileName, lang, client, nmap):
-        document = Document('templateInforme.docx')
+        document = Document(os.path.dirname(os.path.realpath(__file__)) + '/templateInforme.docx')
         title = Language(language=lang)
 
         Report.content(document, title)
