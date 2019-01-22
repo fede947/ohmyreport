@@ -246,7 +246,7 @@ class Report:
         document.add_paragraph(language["recomendation-paragraph"].format(client))
 
         for vuln in vulnerabilities:
-            document.add_heading(vuln.name)
+            document.add_heading(vuln.name, level = 2)
             document.add_heading(language["identification-title"],level=3)
             for elem in Report.toWordFormat(vuln.synopsis):
                 document.add_paragraph(str(elem))

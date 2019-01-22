@@ -31,7 +31,12 @@ def linkVulnerabilitiesSelection(vulnerabilities):
             if (vulnNum == mainVulnNum):
                 continue
             vulnerabilities[mainVulnNum].link(vulnerabilities[vulnNum], name)
-            del vulnerabilities[vulnNum]
+        deleted = 0
+        for vulnNum in vulnsNums:
+            if (vulnNum == mainVulnNum):
+                continue
+            del vulnerabilities[vulnNum - deleted]
+            deleted = deleted + 1
         print("----------------------------------")
         break
 

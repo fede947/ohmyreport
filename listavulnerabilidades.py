@@ -27,7 +27,7 @@ class ListaVulnerabilidades(list):
         return count
 
     def ips(self):
-        self.TotalIps.sort()
+        #self.TotalIps.sort()
         return [ipInfo.ip for ipInfo in self.TotalIps]
 
     def getIps(self):
