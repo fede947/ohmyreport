@@ -26,17 +26,13 @@ def linkVulnerabilitiesSelection(vulnerabilities):
             continue
 
         name = input("Ingrese nuevo nombre para la vulnerabilidad:")
-        mainVulnNum = min(vulnsNums)
+        vulnsNums.sort(reverse=True)
+        mainVulnNum = vulnsNums[-1]
         for vulnNum in vulnsNums:
             if (vulnNum == mainVulnNum):
                 continue
             vulnerabilities[mainVulnNum].link(vulnerabilities[vulnNum], name)
-        deleted = 0
-        for vulnNum in vulnsNums:
-            if (vulnNum == mainVulnNum):
-                continue
-            del vulnerabilities[vulnNum - deleted]
-            deleted = deleted + 1
+            del vulnerabilities[vulnNum]
         print("----------------------------------")
         break
 
