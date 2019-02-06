@@ -2,88 +2,92 @@ SI = "s"
 NO = "n"
 
 def start(vulnerabilities):
-    changeNameMenu(vulnerabilities)
-    delete(vulnerabilities)
-    linkVulnerabilitiesMenu(vulnerabilities)
+    #changeNameMenu(vulnerabilities)
+    #delete(vulnerabilities)
+    #linkVulnerabilitiesMenu(vulnerabilities)
+    exit = False
+    while not exit:
+        print()
+        entry = input('ohmyreport>>>').split(" ")
+        command = entry.pop(0)
+
+        if command == "show":
+            showVulnerabilities(vulnerabilities)
+            continue
+        if command == "delete":
+            vulnerabilities = delete(vulnerabilities, entry[0])
+            continue
+        if command == "chname":
+            vulnerabilities = changeName(vulnerabilities, entry)
+            continue
+        if command == "merge":
+            vulnerabilities = linkVulnerabilitiesSelection(vulnerabilities, entry[0])
+            continue
+        if command == "help":
+            printHelp()
+            continue
+        if command == "exit":
+            exit = True
+            continue
+        print('[-] Invalid command ')
+
+
 
 def showVulnerabilities(vulnerabilities):
     for index, vuln in enumerate(vulnerabilities):
         print("{} {}".format(index, vuln.name))
 
-def linkVulnerabilitiesSelection(vulnerabilities):
-    while(True):
-        entry = input("Ingrese numero de vulnerabilidades a unir separadas por comas:")
-        aux = entry.split(",")
-        vulnsNums = [int(i) for i in aux]
-        vulnsNums.sort(reverse=True)
-        error = False
-        for index, vulnNum in enumerate(vulnsNums):
-            vulnsNums[index] = int(vulnNum)
-            if (vulnsNums[index] >= len(vulnerabilities)):
-                print("La entrada {} no es valida".format(entry))
-                error = True
-                break
+def linkVulnerabilitiesSelection(vulnerabilities, listVuln):
 
-        if (error):
+    aux = listVuln.split(",")
+    vulnsNums = [int(i) for i in aux]
+    vulnsNums.sort(reverse=True)
+    name = vulnerabilities[vulnsNums[-1]].name
+    for index, vulnNum in enumerate(vulnsNums):
+        vulnsNums[index] = int(vulnNum)
+        if (vulnsNums[index] >= len(vulnerabilities)):
+            print("[-] Invalid index")
+            return vulnerabilities
+
+    vulnsNums.sort(reverse=True)
+    mainVulnNum = vulnsNums[-1]
+    for vulnNum in vulnsNums:
+        if (vulnNum == mainVulnNum):
             continue
+        vulnerabilities[mainVulnNum].link(vulnerabilities[vulnNum],name)
+        del vulnerabilities[vulnNum]
+    print("[+] Merged")
+    return vulnerabilities
 
-        name = input("Ingrese nuevo nombre para la vulnerabilidad:")
-        vulnsNums.sort(reverse=True)
-        mainVulnNum = vulnsNums[-1]
-        for vulnNum in vulnsNums:
-            if (vulnNum == mainVulnNum):
-                continue
-            vulnerabilities[mainVulnNum].link(vulnerabilities[vulnNum], name)
-            del vulnerabilities[vulnNum]
-        print("----------------------------------")
-        break
+def changeName(vulnerabilities,params):
 
-def linkVulnerabilitiesMenu(vulnerabilities):
-    while(True):
-        showVulnerabilities(vulnerabilities)
-        entrada = input("Desea unir alguna vulnerabilidad? [S/N]: ")
-        if (entrada.lower() == SI):
-            linkVulnerabilitiesSelection(vulnerabilities)
-        elif (entrada.lower() == NO):
-            break
-        else:
-            print("El caracter ingresado no es valido")
-            print("----------------------------------")
+    index = int(params[0])
+    name = params[1]
+    if (index >= len(vulnerabilities)):
+        print("[-] Invalid index")
+        return vulnerabilities
 
-def changeName(vulnerabilities):
-    while(True):
-        entry = int(input("Ingrese numero de vulnerabilidad a cambiar el nombre:"))
-        if (entry >= len(vulnerabilities)):
-            print("La entrada {} no es valida".format(entry))
-            continue
-
-        print("{} {}".format(entry, vulnerabilities[entry].name))
-        name = input("Ingrese nuevo nombre para la vulnerabilidad:")
-        vulnerabilities[entry].changeName(name)
-        print("----------------------------------")
-        break
-
-def changeNameMenu(vulnerabilities):
-    while(True):
-        showVulnerabilities(vulnerabilities)
-        entrada = input("Desea cambiar el nombre de alguna vulnerabilidad? [S/N]: ")
-        if (entrada.lower() == SI):
-            changeName(vulnerabilities)
-        elif (entrada.lower() == NO):
-            break
-        else:
-            print("El caracter ingresado no es valido")
-            print("----------------------------------")
+    vulnerabilities[index].changeName(name)
+    print("[+] Name changed")
+    return vulnerabilities
 
 
+def delete(vulnerabilities, params):
+    aux = params.split(",")
+    vulnsNums = [int(i) for i in aux]
+    vulnsNums.sort(reverse=True)
+    for index in vulnsNums:
+        del vulnerabilities[int(index)]
+    print('[+] deleted')
+    return vulnerabilities
 
-def delete(vulnerabilities):
-    showVulnerabilities(vulnerabilities)
-    entrada = input("Desea eliminar alguna alguna vulnerabilidad? [S/N]: ")
-    if (entrada.lower() == SI):
-        entry = input("Ingrese numero de vulnerabilidades a eliminar separadas por comas:")
-        aux = entry.split(",")
-        vulnsNums = [int(i) for i in aux]
-        vulnsNums.sort(reverse=True)
-        for index in vulnsNums:
-            del vulnerabilities[int(index)]
+def printHelp():
+    text = []
+    text.append("show       show vulnerabilites")
+    text.append("delete     Delete list of vulnerabilites. eg: delete 1,2,3,4")
+    text.append("merge      Merge list of vulnerabilites. eg: merge 1,2,3,4")
+    text.append("chname     Change a name of one vulnerability. eg: chname 4 NEW_NAME")
+    text.append("exit       exit and continue with the report.")
+    text.append("help       This help :).")
+
+    print('\n'.join(text))
