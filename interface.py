@@ -26,6 +26,9 @@ def start(vulnerabilities):
         if command == "help":
             printHelp()
             continue
+        if command == "sasha":
+            easterEgg()
+            continue
         if command == "exit":
             exit = True
             continue
@@ -61,8 +64,8 @@ def linkVulnerabilitiesSelection(vulnerabilities, listVuln):
 
 def changeName(vulnerabilities,params):
 
-    index = int(params[0])
-    name = params[1]
+    index = int(params.pop(0))
+    name = ' '.join(params)
     if (index >= len(vulnerabilities)):
         print("[-] Invalid index")
         return vulnerabilities
@@ -91,3 +94,6 @@ def printHelp():
     text.append("help       This help :).")
 
     print('\n'.join(text))
+
+def easterEgg():
+    print(" easter egg pendiente.....(╯°□°）╯︵ ┻━┻")
