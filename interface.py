@@ -7,7 +7,7 @@ def start(vulnerabilities):
     #linkVulnerabilitiesMenu(vulnerabilities)
     exit = False
     while not exit:
-        try:
+        #try:
             print()
             entry = input('ohmyreport>>>').split(" ")
             command = entry.pop(0)
@@ -34,10 +34,10 @@ def start(vulnerabilities):
                 exit = True
                 continue
             print('[-] Invalid command ')
-        except KeyboardInterrupt:
+        #except KeyboardInterrupt:
             print()
             print('[-] nah nah nah')
-        except:
+        #except:
             print('[-] Super invalid command (╯`o`）╯︵ ┻━┻')
 
 
@@ -83,7 +83,7 @@ def changeName(vulnerabilities,params):
 
 
 def delete(vulnerabilities, params):
-    aux = rangeParser(listVuln)
+    aux = rangeParser(params)
     vulnsNums = [int(i) for i in aux]
     vulnsNums.sort(reverse=True)
     for index in vulnsNums:
