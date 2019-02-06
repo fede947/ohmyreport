@@ -7,7 +7,7 @@ def start(vulnerabilities):
     #linkVulnerabilitiesMenu(vulnerabilities)
     exit = False
     while not exit:
-        #try:
+        try:
             print()
             entry = input('ohmyreport>>>').split(" ")
             command = entry.pop(0)
@@ -34,10 +34,10 @@ def start(vulnerabilities):
                 exit = True
                 continue
             print('[-] Invalid command ')
-        #except KeyboardInterrupt:
+        except KeyboardInterrupt:
             print()
             print('[-] nah nah nah')
-        #except:
+        except:
             print('[-] Super invalid command (╯°□°）╯︵ ┻━┻')
 
 
@@ -49,12 +49,14 @@ def linkVulnerabilitiesSelection(vulnerabilities, listVuln):
 
     aux = []
     if '-' in listVuln:
-        for i in range(int(listVuln[0]),int(listVuln[2]) + 1):
+        listVuln = listVuln.split('-')
+        for i in range(int(listVuln[0]),int(listVuln[1]) + 1): #FIXIT arreglar el algoritmo
             aux.append(i)
     else:
         aux = listVuln.split(",")
     vulnsNums = [int(i) for i in aux]
     vulnsNums.sort(reverse=True)
+    print(vulnsNums)
     name = vulnerabilities[vulnsNums[-1]].name
     for index, vulnNum in enumerate(vulnsNums):
         vulnsNums[index] = int(vulnNum)
@@ -62,7 +64,6 @@ def linkVulnerabilitiesSelection(vulnerabilities, listVuln):
             print("[-] Invalid index")
             return vulnerabilities
 
-    vulnsNums.sort(reverse=True)
     mainVulnNum = vulnsNums[-1]
     for vulnNum in vulnsNums:
         if (vulnNum == mainVulnNum):
