@@ -86,7 +86,12 @@ def changeName(vulnerabilities,params):
 
 
 def delete(vulnerabilities, params):
-    aux = params.split(",")
+    aux = []
+    if '-' in params:
+        for i in range(int(params[0]),int(params[2]) + 1):
+            aux.append(i)
+    else:
+        aux = params.split(",")
     vulnsNums = [int(i) for i in aux]
     vulnsNums.sort(reverse=True)
     for index in vulnsNums:
