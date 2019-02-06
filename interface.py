@@ -38,7 +38,7 @@ def start(vulnerabilities):
             print()
             print('[-] nah nah nah')
         except:
-            print('[-] Super invalid command (╯°□°）╯︵ ┻━┻')
+            print('[-] Super invalid command (╯`o`）╯︵ ┻━┻')
 
 
 def showVulnerabilities(vulnerabilities):
@@ -47,16 +47,12 @@ def showVulnerabilities(vulnerabilities):
 
 def linkVulnerabilitiesSelection(vulnerabilities, listVuln):
 
-    aux = []
-    if '-' in listVuln:
-        listVuln = listVuln.split('-')
-        for i in range(int(listVuln[0]),int(listVuln[1]) + 1): #FIXIT arreglar el algoritmo
-            aux.append(i)
-    else:
-        aux = listVuln.split(",")
+    aux = rangeParser(listVuln)
     vulnsNums = [int(i) for i in aux]
     vulnsNums.sort(reverse=True)
-    print(vulnsNums)
+    if(vulnsNums[-1]>len(vulnerabilities)):
+        print("[-] Invalid index")
+        return vulnerabilities
     name = vulnerabilities[vulnsNums[-1]].name
     for index, vulnNum in enumerate(vulnsNums):
         vulnsNums[index] = int(vulnNum)
@@ -87,12 +83,7 @@ def changeName(vulnerabilities,params):
 
 
 def delete(vulnerabilities, params):
-    aux = []
-    if '-' in params:
-        for i in range(int(params[0]),int(params[2]) + 1):
-            aux.append(i)
-    else:
-        aux = params.split(",")
+    aux = rangeParser(listVuln)
     vulnsNums = [int(i) for i in aux]
     vulnsNums.sort(reverse=True)
     for index in vulnsNums:
@@ -112,4 +103,14 @@ def printHelp():
     print('\n'.join(text))
 
 def easterEgg():
-    print(" easter egg pendiente.....(╯°□°）╯︵ ┻━┻")
+    print("this is not pornhub")
+
+def rangeParser(listVuln):
+    aux = []
+    if '-' in listVuln:
+        listVuln = listVuln.split('-')
+        for i in range(int(listVuln[0]),int(listVuln[1]) + 1): #FIXIT arreglar el algoritmo
+            aux.append(i)
+    else:
+        aux = listVuln.split(",")
+    return aux
