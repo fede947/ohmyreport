@@ -13,7 +13,9 @@ def showVulnerabilities(vulnerabilities):
 def linkVulnerabilitiesSelection(vulnerabilities):
     while(True):
         entry = input("Ingrese numero de vulnerabilidades a unir separadas por comas:")
-        vulnsNums = entry.split(",")
+        aux = entry.split(",")
+        vulnsNums = [int(i) for i in aux]
+        vulnsNums.sort(reverse=True)
         error = False
         for index, vulnNum in enumerate(vulnsNums):
             vulnsNums[index] = int(vulnNum)
@@ -80,7 +82,8 @@ def delete(vulnerabilities):
     entrada = input("Desea eliminar alguna alguna vulnerabilidad? [S/N]: ")
     if (entrada.lower() == SI):
         entry = input("Ingrese numero de vulnerabilidades a eliminar separadas por comas:")
-        vulnsNums = entry.split(",")
+        aux = entry.split(",")
+        vulnsNums = [int(i) for i in aux]
         vulnsNums.sort(reverse=True)
         for index in vulnsNums:
             del vulnerabilities[int(index)]
