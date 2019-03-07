@@ -34,10 +34,10 @@ def start(vulnerabilities):
                 exit = True
                 continue
             print('[-] Invalid command ')
-        #except KeyboardInterrupt:
+        except KeyboardInterrupt:
             print()
             print('[-] nah nah nah')
-        #except:
+        except:
             print('[-] Super invalid command (╯`o`）╯︵ ┻━┻')
 
 
