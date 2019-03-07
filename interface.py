@@ -7,7 +7,7 @@ def start(vulnerabilities):
     #linkVulnerabilitiesMenu(vulnerabilities)
     exit = False
     while not exit:
-        #try:
+        try:
             print()
             entry = input('ohmyreport>>>').split(" ")
             command = entry.pop(0)
